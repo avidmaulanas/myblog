@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   before_action :authenticate_user!  
-  before_filter :set_current_user
+  # before_filter :set_current_user
 
   before_filter :configure_devise_params, if: :devise_controller?
 
-  # before_action :check_subdomain, unless: :devise_controller?
+  before_action :check_subdomain, unless: :devise_controller?
 
   protect_from_forgery
 
@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
       if resource.respond_to?("username")
         dashboard_path(resource, :subdomain => resource.username)
       end
+      set_current_user
     end
 
     def after_sign_out_path_for(resource)
