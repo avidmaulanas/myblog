@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
     def after_sign_in_path_for(resource)
       if current_user.respond_to?("username")
-        dashboard_url(:subdomain => current_user.username)
+        dashboard_url(:subdomain => "#{current_user.username}.#{request.subdomain}")
       end      
     end
 
