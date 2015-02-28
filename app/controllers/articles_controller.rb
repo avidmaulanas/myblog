@@ -7,9 +7,9 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if request.subdomain.empty?
-      @articles = Article.all_user.page(params[:page]).per(10)
+      @articles = Article.published.order_by_desc.page(params[:page]).per(10)
     else
-      @articles = Article.all_user.by_subdomain(request.subdomain).page(params[:page]).per(10)
+      @articles = Article.current_user.published.order_by_desc.page(params[:page]).per(10)
     end
   end
 
