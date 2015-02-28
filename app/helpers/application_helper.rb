@@ -3,13 +3,15 @@ module ApplicationHelper
 	
 	def alert_tag(message = nil, type = 'info')
 		if message 
-			content_tag(:div, 
-				content_tag(:button, 
-					content_tag(:span, '&times;'.html_safe, "aria-hidden": "true"),
-					{ type: "button", class: "close", "data-dismiss": "alert", "aria-label": "close" }
-				) + message, 
-				{ class: "alert alert-#{type} alert-dismissible fade in", role: "alert" } 
-			) 	
+
+			html = <<-HTML
+	    <div class="alert alert-#{type} alert-dismissible fade in" role="alert"> <button type="button"
+	    class="close" data-dismiss="alert" aria-label="close">x</button>
+	      #{message}
+	    </div>
+	    HTML
+
+	    html.html_safe
 		end
 	end
 
