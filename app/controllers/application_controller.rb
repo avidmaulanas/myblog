@@ -10,19 +10,15 @@ class ApplicationController < ActionController::Base
 
   before_action :check_subdomain, unless: :devise_controller?
 
-  after_filter :set_csrf_cookie_for_ng  
+  after_filter :set_csrf_cookie_for_ng
 
-  rescue_from ActionController::InvalidAuthenticityToken do |exception|
+  def set_csrf_cookie_for_ng
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-    render :error => 'Invalid authenticity token', {:status => :unprocessable_entity} 
   end
 
   protected
-    def set_csrf_cookie_for_ng
-      cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-    end
     def verified_request?
-      super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
+      super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
     end
 
   private
