@@ -81,7 +81,6 @@ gem 'carrierwave'
 # Font awesome
 gem 'font-awesome-less', '~> 4.2.0'
 
-gem 'unicorn'
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
