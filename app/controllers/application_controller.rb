@@ -40,9 +40,9 @@ class ApplicationController < ActionController::Base
       end      
     end
 
-    def after_sign_out_path_for(resource)
-  	  root_url(resource, :subdomain => nil)
-  	end
+   #  def after_sign_out_path_for(resource)
+  	#   root_url(resource, :subdomain => nil)
+  	# end
 
     def check_subdomain
       if current_user.respond_to?("username")
