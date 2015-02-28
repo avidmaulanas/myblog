@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_devise_params, if: :devise_controller?
 
-  before_action :check_subdomain, unless: :devise_controller?
+  # before_action :check_subdomain, unless: :devise_controller?
 
   protect_from_forgery
 
