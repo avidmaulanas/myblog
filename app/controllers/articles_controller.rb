@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  skip_before_action :check_subdomain, only: [:index]
+  # skip_before_action :check_subdomain, only: [:index]
   skip_before_filter :authenticate_user!, :only => [:index, :show, :tagged]
 
   # GET /articles
