@@ -1,0 +1,43 @@
+- content_for(:dashboard_style) do
+		css: header.intro-header { height: 60px; }
+
+- content_for(:dashboard_content)
+	.container-fluid
+		.page-header 
+			h1 Dashboard
+
+		.panel.panel-default
+		  .panel-heading
+		    strong All Articles (#{@number_articles})
+		    .pull-right
+			    span.small 
+				  |  Draft (#{@number_articles_draft}) | 
+				  |  Published (#{@number_articles_published})
+		    
+		  .panel-body
+		  	table.table.table-hover.small
+					thead
+						tr
+							th Article
+							th Comment
+							th Status
+							th
+					tbody
+					- @articles_all.each do |article|
+						tr
+							td 
+								strong == link_to article.title, article
+								br: span.text-muted
+									| Posted by 
+									i == link_to article.user.username, user_path(article.user.id)
+									|  on 
+									== article.updated_at.to_formatted_s(:long_ordinal)		
+							td == pluralize(article.comments.count, "comment")
+							td == article.status.capitalize
+							td
+								== link_to content_tag(:span, "Edit ", class: "glyphicon glyphicon-edit", title: "Edit"), edit_article_path(article.id), :class => "small"
+								|  | 
+								== link_to content_tag(:span, "Delete", class: "glyphicon glyphicon-trash", title: "Delete"), article, method: :delete, data: { confirm: 'Are you sure?' }, :class => "small"
+
+	ul.pager
+		li == paginate @articles_all

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Myblog
+    == stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true   
+    == favicon_link_tag
+    == csrf_meta_tags 
+
+  body
+    .container
+        .row
+          .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+            == yield
+    hr
+    /! Footer
+    footer
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1            
+            p.copyright.text-muted Copyright &copy; MyBlog #{time.year}
+
+
+    /! js
+    == javascript_include_tag 'application', 'data-turbolinks-track' => true 
+    script $('.dropdown-toggle').dropdown()

@@ -1,0 +1,25 @@
+== form_for @article do |f|
+  - if @article.errors.any?
+    #error_explanation
+      h2.small.text-danger = "#{pluralize(@article.errors.count, "error")} prohibited this Article from being saved:"
+      ul.small.text-danger
+        - @article.errors.full_messages.each do |message|
+          li.small = message
+
+
+  .form-group.input-group-lg
+    == f.label :title
+    == f.text_field :title, :class => "form-control"
+  .form-group.input-group-lg
+    == f.label :description
+    == f.cktext_area :description, :class => "form-control"
+  .form-group.input-group-lg
+    == f.label "Tags"
+    em.small
+      |  (Enter a comma separated list of tags.)
+    == f.text_field :tag_list, :value => f.object.tag_list.join(', '), :class => "form-control" 
+  .form-group.input-group-lg
+    == f.label :status, "Status Publish"
+    == f.select :status, ['Draft', 'Published'], {}, :class => "form-control"
+
+  == f.submit :class => "btn btn-info"

@@ -1,0 +1,16 @@
+== alert_tag notice, "success"
+
+.page-header: h1 Profile
+.jumbotron
+	- if @user.avatar_url.split('/')[5].eql?("default_profile_pic.jpg")
+		== image_tag("default_profile_pic.jpg", size: "200", class: "img-rounded")	
+	- else
+		== image_tag(@user.avatar_url, size: "200", class: "img-rounded")
+	
+	h3 == @user.username
+	p #{@user.firstname} #{@user.lastname}
+	p: em == @user.biographical_info
+
+	- if user_signed_in?
+		p.small #{link_to 'Edit', edit_user_path(@user)} | #{link_to 'Back', users_path}
+

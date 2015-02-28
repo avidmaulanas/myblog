@@ -1,0 +1,25 @@
+h1 Listing users
+
+table
+  thead
+    tr
+      th Username
+      th Firstname
+      th Lastname
+      th Biographical info
+      th
+      th
+      th
+
+  tbody
+      tr
+        td = @user.username
+        td = @user.firstname
+        td = @user.lastname
+        td = @user.biographical_info
+        td = link_to 'Show', @user
+        td = link_to 'Edit', edit_user_path(@user)
+
+br
+
+= link_to 'New User', new_user_path
