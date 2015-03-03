@@ -35,18 +35,23 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-      if current_user.respond_to?("username")
-        # lokal
-        # dashboard_url(:subdomain => current_user.username)
-        # heroku
-        # dashboard_url(:subdomain => "#{current_user.username}.#{request.subdomain}")
-        dashboard_url
-      end      
+      # if current_user.respond_to?("username")
+      #   lokal
+      #   dashboard_url(:subdomain => current_user.username)
+      # end      
+
+      stored_location_for(resource) ||
+      if resource.is_a?(Admin)
+        admin_dashboard_path
+      else
+        dashboard_path
+      end
     end
 
-    # lokal
     def after_sign_out_path_for(resource)
-  	  root_url(resource, :subdomain => nil)
+      # lokal
+  	  # root_url(resource, :subdomain => nil)
+      root_path
   	end
 
     def check_subdomain
