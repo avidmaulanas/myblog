@@ -91,10 +91,7 @@ class ArticlesController < ApplicationController
   def upvote
     @article = Article.find(params[:id])
     @article.upvote_by current_user
-    # redirect_to @article
-    respond_to do |format|
-      format.js
-    end
+    redirect_to @article
   end
 
   def downvote

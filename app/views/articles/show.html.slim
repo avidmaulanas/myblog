@@ -9,16 +9,13 @@
             | Posted by #{link_to @article.user.username, user_path(@article.user.id)} on
             |  #{@article.created_at.to_formatted_s(:long_ordinal)}
 
-/ notice
-== alert_tag notice, "success"
-
 / article description
 == sanitize @article.description
 hr
 - if @article.tags.any?
   div.pull-left
   	span.small Tagged with: 
-  	span.small == raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name) }.join(', ') 
+  	span.small == raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "tags" }.join(', ') 
 
 
 / rate
