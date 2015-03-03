@@ -45,7 +45,7 @@ hr
 		- else
 			== image_tag(@article.user.avatar_url, size: "64", class: "img-rounded")			
 	.media-body
-		h4.media-heading == "#{@article.user.firstname} #{@article.user.lastname}"
+		h4.media-heading == link_to "#{@article.user.firstname} #{@article.user.lastname}", user_path(@article.user.id)
 		.small == @article.user.biographical_info
 hr
 .pull-right.small
