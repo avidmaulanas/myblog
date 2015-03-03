@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
 
  	scope :recent, ->(n) { order("created_at DESC").limit(n) }
 
-  letsrate_rater
-
  	def self.current
     Thread.current[:user]
   end

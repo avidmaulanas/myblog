@@ -21,8 +21,7 @@ class Article < ActiveRecord::Base
 
 	acts_as_commentable
 	acts_as_taggable
-	# acts_rateable
-	# seems_rateable
+	acts_as_votable
 
 
 	private

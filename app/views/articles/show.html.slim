@@ -16,9 +16,21 @@
 == sanitize @article.description
 hr
 - if @article.tags.any?
-	span.small Tagged with: 
-	== raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "small" }.join(', ') 
+  div.pull-left
+  	span.small Tagged with: 
+  	span.small == raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name) }.join(', ') 
 
+
+/ rate
+div.pull-right 
+  span.small
+    = link_to "Upvote", like_article_path(@article), method: :put, :class => "small"
+    = " (#{@article.get_up_votes.size}) | "
+    = link_to "Downvote", dislike_article_path(@article), method: :put, :class => "small"
+    = " (#{@article.get_down_votes.size})"
+
+.clearfix
+/ share
 hr		
 .pull-left.small
 	| Share: #{social_share_button_tag(@article.title, 'data-popup' => true)}
@@ -29,8 +41,8 @@ hr
 		'  |
 		= link_to 'Back', dashboard_path
 
-hr
 /! author
+hr
 .media
 	.media-left.pull-left
 		- if @article.user.avatar_url.split('/')[5].eql?("default_profile_pic.jpg")
@@ -46,8 +58,8 @@ hr
 
 .clearfix
 
-h3 Comments
 /! form comment
+h3 Comments
 = form_for [@article, @article.comments.build] do |f|
 	- if not user_signed_in?
 		.form-group = f.text_field :name, placeholder: "Name", :class => "form-control"
@@ -66,4 +78,3 @@ br
 
 		- if user_signed_in?
 			== link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small"
-

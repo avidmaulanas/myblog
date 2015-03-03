@@ -19,3 +19,4 @@
 //= require ckeditor/init
 //= require clean-blog
 //= require abuse_reports
+//= require articles

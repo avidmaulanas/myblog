@@ -12,5 +12,6 @@
 	p: em == @user.biographical_info
 
 	- if user_signed_in?
-		p.small #{link_to 'Edit', edit_user_path(@user)} | #{link_to 'Back', users_path}
+		br
+		span.small #{link_to 'Edit', edit_user_path(@user)}
 

@@ -2,9 +2,8 @@ doctype html
 html
   head
     title Myblog
-    == stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true   
-    - if not controller.controller_name.eql?("articles") 
-      == yield :dashboard_style 
+    == stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    == javascript_include_tag 'application' 
     == csrf_meta_tags 
 
   body
@@ -46,29 +45,25 @@ html
               li == link_to "Login", new_user_session_path
         /! /.navbar-collapse
       /! /.container
-    /! Page Header
+    
     /! Set your background image for this header on the line below.
-    - if controller_name.eql?("articles") and action_name.eql?("show") 
-        == yield :header_article
-    - elsif controller_name.eql?("articles") and action_name.eql?("index") 
-        == yield :header_articles
-    - elsif controller_name.eql?("home") and not user_signed_in?
-        == yield :header_home
-    - elsif action_name.eql?("tagged")
-        == yield :header_article_tagged
-    - else
-        header.intro-header style=("height: 60px;")
+    - content_for(:header_dashboard)
+      header.intro-header style=("height: 60px;")
 
-    /! Main Content   
-    - if controller_name.eql?("dashboard")
-        == yield :dashboard_content
-    - else
+    - content_for(:content_main)
       .container
         .row
           .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
             /! Main Content
             == yield
             /! End Main Content
+
+    /! Page Header
+    == yield header_custom
+
+    /! Main Content   
+    == yield controller_name.eql?("dashboard") ? :content_dashboard : :content_main   
+
     hr
     /! Footer
     footer
@@ -79,5 +74,4 @@ html
 
 
     /! js
-    == javascript_include_tag 'application', 'data-turbolinks-track' => true 
     script $('.dropdown-toggle').dropdown()

@@ -9,11 +9,19 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for :users
+  
+  post 'rate' => 'articles#rate'
 
   resources :articles do
     resources :comments
     resources :abuse_reports
+
+    member do
+      put "like", to: "articles#upvote"
+      put "dislike", to: "articles#downvote"
+    end
   end
+
   get 'tagged' => 'articles#tagged', :as => 'tagged'
   resources :users
 

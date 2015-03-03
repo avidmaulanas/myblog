@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
 
     # New object comment
     @comment = @article.comments.new
+
   end
 
   # GET /articles/new
@@ -86,6 +87,22 @@ class ArticlesController < ApplicationController
       @num_articles = Article.order('created_at DESC').size
     end  
   end
+
+  def upvote
+    @article = Article.find(params[:id])
+    @article.upvote_by current_user
+    # redirect_to @article
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def downvote
+    @article = Article.find(params[:id])
+    @article.downvote_by current_user
+    redirect_to @article
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

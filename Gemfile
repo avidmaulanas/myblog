@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+# Ruby 2.2.0
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 
@@ -63,7 +63,8 @@ gem 'acts-as-taggable-on'
 # gem "acts_as_rateable", :git => "git://github.com/anton-zaytsev/acts_as_rateable.git"
 # gem "seems_rateable"
 # gem "glynx_rateable"
-gem 'letsrate'
+# gem 'letsrate'
+gem 'acts_as_votable', '~> 0.10.0'
 
 # Pagination
 gem 'kaminari'

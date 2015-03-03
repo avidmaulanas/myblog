@@ -30,7 +30,7 @@ development:
   database: myblog_development
   pool: 5
   username: avid
-  password: 123456
+  password: avid123
 
 test: &TEST
   adapter: postgresql
@@ -38,7 +38,7 @@ test: &TEST
   database: myblog_test
   pool: 5
   username: avid
-  password: 123456
+  password: avid123
 
 production:
   adapter: postgresql
@@ -46,7 +46,7 @@ production:
   database: myblog_production
   pool: 5
   username: avid
-  password: 123456
+  password: avid123
 
 cucumber:
   <<: *TEST
