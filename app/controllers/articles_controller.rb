@@ -91,13 +91,11 @@ class ArticlesController < ApplicationController
   def upvote
     @article = Article.find(params[:id])
     @article.upvote_by current_user
-    redirect_to @article
   end
 
   def downvote
     @article = Article.find(params[:id])
     @article.downvote_by current_user
-    redirect_to @article
   end
 
 

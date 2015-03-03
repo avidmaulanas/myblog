@@ -21,10 +21,10 @@ hr
 / rate
 div.pull-right 
   span.small
-    = link_to "Upvote", like_article_path(@article), method: :put, :class => "small"
-    = " (#{@article.get_up_votes.size}) | "
-    = link_to "Downvote", dislike_article_path(@article), method: :put, :class => "small"
-    = " (#{@article.get_down_votes.size})"
+    = link_to "Upvote", like_article_path(@article), method: :put, :class => "small", remote: true
+    span.upvote = " (#{@article.get_up_votes.size}) | "
+    = link_to "Downvote", dislike_article_path(@article), method: :put, :class => "small", remote: true
+    span.downvote = " (#{@article.get_down_votes.size})"
 
 .clearfix
 / share
