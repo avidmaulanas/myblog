@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+puts "Create Users..."
 User.create([
 	{username: 'avid',firstname: 'Avid', lastname: 'Maulana', email: 'avid@email.com', password: '12345678', password_confirmation: '12345678', biographical_info: 'Managed a small team marketing cigarettes worldwide. Spent 2001-2004 working on cigarettes in the government sector. Uniquely-equipped for exporting barbie dolls in the government sector. Practiced in the art of working on Magic 8-Balls for the government. Spent 2001-2004 buying and selling robots in Washington, DC. Crossed the country marketing toy trucks in Pensacola, FL.'},
 	{username: 'erich',firstname: 'Erich', lastname: 'Moitoso', email: 'erich@email.com', password: '12345678', password_confirmation: '12345678', biographical_info: "Earned praise for creating marketing channels for fried chicken in Prescott, AZ. Enthusiastic about donating rubik's cubes in the financial sector. Spent a year investing in toy planes in the financial sector. Spent 2002-2008 investing in sausage in the UK. Have a strong interest in short selling pond scum in Salisbury, MD. Gifted in creating marketing channels for basketballs in Gainesville, FL."},
@@ -19,8 +19,9 @@ User.create([
 	{username: 'emeline',firstname: 'Emeline', lastname: 'Manuelito', email: 'emeline@email.com', password: '12345678', password_confirmation: '12345678', biographical_info: "Spent the better part of the 90's deploying bassoons in Suffolk, NY. Gifted in developing tattoos in Las Vegas, NV. Spent 2002-2008 testing the market for Easter candy in Edison, NJ. Prior to my current job I was merchandising weebles in Washington, DC. Prior to my current job I was short selling jigsaw puzzles in Los Angeles, CA. In 2009 I was importing toy soldiers in the UK."}
 ])
 
-Article.create!([
-	{
+puts "Create Articles..."
+Article.create!(
+	[{
 		title: 'Donec elit libero sodales',
 		description: 
 		'<p>Phasellus a est. Aliquam erat volutpat. Aenean commodo ligula eget dolor.</p>
@@ -619,7 +620,7 @@ Article.create!([
 		status: 'draft',
 		tag_list: 'Public, Article',
 		user_id: 10
-	}	
-])
+	}]
+)
 
 
