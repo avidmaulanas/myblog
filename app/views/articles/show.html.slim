@@ -20,11 +20,14 @@ hr
 
 / rate
 div.pull-right 
-  span.small
-    = link_to "Upvote", like_article_path(@article), method: :put, :class => "small", remote: true
-    span.upvote = " (#{@article.get_up_votes.size}) | "
-    = link_to "Downvote", dislike_article_path(@article), method: :put, :class => "small", remote: true
-    span.downvote = " (#{@article.get_down_votes.size})"
+  .small
+    = link_to "Upvote", upvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
+    == "&nbsp;".html_safe
+    span.upvote class="badge" = @article.get_up_votes.size
+    == "&nbsp;".html_safe
+    = link_to "Downvote", downvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
+    == "&nbsp;".html_safe
+    span.downvote class="badge" = @article.get_down_votes.size
 
 .clearfix
 / share

@@ -1,2 +1,2 @@
-$('.upvote').html(' (<%= escape_javascript @article.get_up_votes.size.to_s %>) | ')
+$('.upvote').html(' (<%= escape_javascript @article.get_up_votes.size.to_s  %>) | ')
 $('.downvote').html(' (<%= escape_javascript @article.get_down_votes.size.to_s %>)')

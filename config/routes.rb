@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :abuse_reports
 
     member do
-      put "like", to: "articles#upvote"
-      put "dislike", to: "articles#downvote"
+      put "upvote", to: "articles#upvote"
+      put "downvote", to: "articles#downvote"
     end
   end
 

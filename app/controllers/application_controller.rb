@@ -42,9 +42,9 @@ class ApplicationController < ActionController::Base
 
       stored_location_for(resource) ||
       if resource.is_a?(Admin)
-        admin_dashboard_path
+        admin_dashboard_url
       else
-        dashboard_path
+        dashboard_url
       end
     end
 

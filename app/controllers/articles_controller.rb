@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   # skip_before_action :check_subdomain, only: [:index]
-  skip_before_filter :authenticate_user!, :only => [:index, :show, :tagged]
+  skip_before_filter :authenticate_user!, :only => [:index, :show, :tagged, :upvote, :downvote]
 
   # GET /articles
   # GET /articles.json
@@ -88,16 +88,17 @@ class ArticlesController < ApplicationController
     end  
   end
 
-  def upvote
-    @article = Article.find(params[:id])
+  def upvote    
     @article.upvote_by current_user
+
+    respond_vote  
   end
 
   def downvote
-    @article = Article.find(params[:id])
     @article.downvote_by current_user
-  end
 
+    respond_vote
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -109,4 +110,14 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :description, :user_id, :status, :tag_list)
     end    
+
+    def respond_vote
+      respond_to do |format|
+        if user_signed_in?
+          format.js
+        else
+          format.html { redirect_to new_user_session_url, alert: 'You need to sign in or sign up before continuing.' }
+        end
+      end 
+    end
 end
