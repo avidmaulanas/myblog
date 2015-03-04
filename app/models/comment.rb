@@ -4,8 +4,6 @@ class Comment < ActiveRecord::Base
 
   validates :name, :email, :comment, presence: true
 
-  before_create :current_user_comment
-
   default_scope -> { order('created_at ASC') }
   scope :recent, ->(n) { order('created_at DESC').limit(n) }
 
@@ -17,12 +15,4 @@ class Comment < ActiveRecord::Base
   belongs_to :article
   belongs_to :commentable, :polymorphic => true
   
-  private
-	  def current_user_comment
-	  	if not User.current.eql?(nil)
-	  		self.name = User.current.username
-	  		self.email = User.current.email
-	  	end
-	  end
-
 end

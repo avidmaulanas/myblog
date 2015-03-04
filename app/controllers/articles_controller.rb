@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     @comments = @article.comments.reverse
 
     # New object comment
-    @comment = @article.comments.new
+    @comment = @article.comments.build
 
   end
 

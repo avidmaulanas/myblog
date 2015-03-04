@@ -58,10 +58,17 @@ hr
 
 /! form comment
 h3 Comments
-= form_for [@article, @article.comments.build] do |f|
-	- if not user_signed_in?
+- if @article.errors.any?
+  #error_explanation
+    h2.small.text-danger = "#{pluralize(@article.errors.count, "error")} prohibited this user from being saved:"
+    ul.small.text-danger
+      - @article.errors.full_messages.each do |message|
+        li.small = message
+= form_for [@article, @comment] do |f|
+	- unless user_signed_in?
 		.form-group = f.text_field :name, placeholder: "Name", :class => "form-control"
 		.form-group = f.email_field :email, placeholder: "Email", :class => "form-control"
+
 	.form-group = f.text_area :comment, size: "5x6",placeholder: "Comments..", :class => "form-control"
 	
 	= f.submit "Post Comment", :class => "btn btn-default" 
@@ -72,7 +79,8 @@ br
 	.small.well
 		span: strong #{comment.name}
 		span.small.pull-right.text-muted: em #{time_ago_in_words comment.created_at} ago
-		p == comment.comment
+		p == sanitize simple_format(comment.comment)
 
-		- if user_signed_in?
-			== link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small"
+		- if user_signed_in? and current_user.id.eql?(@article.user_id)
+			== link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small text-danger"
+

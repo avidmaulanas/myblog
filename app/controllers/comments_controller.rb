@@ -4,9 +4,17 @@ class CommentsController < ApplicationController
   def create
   	@article = Article.find(params[:article_id])
 	  @comment = @article.comments.build(params_comment)
+
+    if user_signed_in?
+      @comment.name = current_user.username
+      @comment.email= current_user.email
+    end
+
 	  if @comment.save
 	    redirect_to @article
-	  end
+	  else
+      redirect_to :back, alert: "Comment can't be blank."
+    end
   end
 
   def destroy
@@ -19,6 +27,6 @@ class CommentsController < ApplicationController
 
   private
   	def params_comment
-  		params.require(:comment).permit(:article_id, :name, :email, :title, :comment)
+  		params.require(:comment).permit(:article_id, :name, :email, :comment)
   	end
 end
