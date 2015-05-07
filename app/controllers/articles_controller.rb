@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  # skip_before_action :check_subdomain, only: [:index]
   skip_before_filter :authenticate_user!, :only => [:index, :show, :tagged, :upvote, :downvote]
 
   # GET /articles
@@ -26,7 +25,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    @article = Article.new     
+    @article = Article.new
   end
 
   # GET /articles/1/edit
@@ -79,19 +78,19 @@ class ArticlesController < ApplicationController
   end
 
   def tagged
-    if params[:tag].present? 
+    if params[:tag].present?
       @articles = Article.published.tagged_with(params[:tag]).page(params[:page]).per(10)
       @num_articles = Article.published.tagged_with(params[:tag]).size
-    else 
+    else
       @articles = Article.published.order('created_at DESC').page(params[:page]).per(10)
       @num_articles = Article.order('created_at DESC').size
-    end  
+    end
   end
 
-  def upvote    
+  def upvote
     @article.upvote_by current_user
 
-    respond_vote  
+    respond_vote
   end
 
   def downvote
@@ -103,13 +102,13 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id]) 
+      @article = Article.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :description, :user_id, :status, :tag_list)
-    end    
+    end
 
     def respond_vote
       respond_to do |format|
@@ -118,6 +117,6 @@ class ArticlesController < ApplicationController
         else
           format.html { redirect_to new_user_session_url, alert: 'You need to sign in or sign up before continuing.' }
         end
-      end 
+      end
     end
 end

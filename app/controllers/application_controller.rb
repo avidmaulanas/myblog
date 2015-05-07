@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
 
-  before_action :authenticate_user!  
+  before_action :authenticate_user!
   before_filter :set_current_user
 
   before_filter :configure_devise_params, if: :devise_controller?
@@ -38,12 +38,10 @@ class ApplicationController < ActionController::Base
       # if current_user.respond_to?("username")
       #   lokal
       #   dashboard_url(:subdomain => current_user.username)
-      # end      
+      # end
 
       stored_location_for(resource) ||
-      if resource.is_a?(Admin)
-        admin_dashboard_url
-      else
+      if resource.is_a?(User)
         dashboard_url
       end
     end
@@ -56,7 +54,7 @@ class ApplicationController < ActionController::Base
 
     def check_subdomain
       if current_user.respond_to?("username")
-        unless request.subdomain.eql?(current_user.username) 
+        unless request.subdomain.eql?(current_user.username)
           redirect_to controller: request.params[:controller], subdomain: current_user.username
         end
       end
