@@ -10,17 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require twitter/bootstrap
+ *= require bootstrap
+ *= require fontawesome
  *= require social-share-button
+ *= require blog
  *= require_self
  */
-
-@import "clean-blog/clean-blog.less";
- 
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
-
 
 a, a:hover {
   text-decoration: none;

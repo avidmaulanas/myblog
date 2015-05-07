@@ -14,9 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require social-share-button
-//= require twitter/bootstrap/alert
-//= require twitter/bootstrap/dropdown
-//= require ckeditor/init
-//= require clean-blog
+//= require bootstrap
+//= require ckeditor
+//= require blog
 //= require abuse_reports
-//= require articles

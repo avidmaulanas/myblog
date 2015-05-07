@@ -2,16 +2,14 @@ source 'https://rubygems.org'
 
 # Ruby 2.2.0
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -31,27 +29,41 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-##############
-# Additional #
-##############
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'pry-byebug'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  # Debug
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  # Development Gems
+  gem 'bullet'
+  gem 'lol_dba'
+  gem 'pry-rails'
+end
+
+# Assets
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-fontawesome'
+  gem 'rails-assets-ckeditor'
+end
+
+# database
+gem 'pg'
 
 # Slim for template html
 gem 'slim-rails'
 
-# Dependency of Less
-gem 'therubyracer'
-
-# Less for template css
+# template css
 gem 'less-rails'
 
 # Devise for authentication
 gem 'devise'
-
-# Framework HTML, CSS, & JS
-gem 'less-rails-bootstrap'
-
-# Active Admin
-gem 'activeadmin', github: 'activeadmin'
 
 # For Comment Article
 gem 'acts_as_commentable'
@@ -60,44 +72,13 @@ gem 'acts_as_commentable'
 gem 'acts-as-taggable-on'
 
 # For rating
-# gem "acts_as_rateable", :git => "git://github.com/anton-zaytsev/acts_as_rateable.git"
-# gem "seems_rateable"
-# gem "glynx_rateable"
-# gem 'letsrate'
 gem 'acts_as_votable', '~> 0.10.0'
 
 # Pagination
 gem 'kaminari'
 
 # Share to social media
-# gem 'shareable'
 gem 'social-share-button', '~> 0.1.6'
-
-# Test editor style
-gem 'ckeditor', '~> 4.1.1'
 
 # Upload file
 gem 'carrierwave'
-
-# Font awesome
-gem 'font-awesome-less', '~> 4.2.0'
-
-group :development, :test do
-	# Use sqlite3 as the database for Active Record
-	gem 'sqlite3'
-
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  gem 'pry-byebug'
-end
-
-group :production do
-  gem 'pg'
-end

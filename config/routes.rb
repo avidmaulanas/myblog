@@ -1,7 +1,5 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   get 'dashboard' => 'dashboard#index'
 
   get 'comments/create'
@@ -9,7 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for :users
-  
+
   post 'rate' => 'articles#rate'
 
   resources :articles do
