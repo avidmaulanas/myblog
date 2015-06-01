@@ -16,5 +16,6 @@
 //= require social-share-button
 //= require bootstrap
 //= require ckeditor/init
-//= require blog
-//= require abuse_reports
+//= require_tree ./ckeditor
+//= require_tree .
+
