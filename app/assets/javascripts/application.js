@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require social-share-button
 //= require bootstrap
 //= require ckeditor/init
@@ -20,7 +20,7 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require_tree .
-
+//= require turbolinks
 
 NProgress.configure({
   showSpinner: false,

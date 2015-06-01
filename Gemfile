@@ -99,3 +99,6 @@ gem 'friendly_id'
 
 # NProgress
 gem 'nprogress-rails'
+
+# JQuery Turbolinks
+gem 'jquery-turbolinks'
