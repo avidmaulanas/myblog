@@ -110,5 +110,8 @@ gem 'bootstrap_form'
 # Miscellaneous
 gem 'inherited_resources'
 
-# Bootstrap growl
+# Bootstrap growl as notification
 gem 'bootstrap-growl-rails'
+
+# Bootbox as alert message
+gem 'bootbox-rails'

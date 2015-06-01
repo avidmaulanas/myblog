@@ -17,7 +17,9 @@ class AbuseReportsController < InheritedResources::Base
   def new
   	@article = Article.find(params[:article_id])
     @abuse_report = @article.abuse_reports.new
-    render layout: 'abuse_report'
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /abuse_reports/1/edit

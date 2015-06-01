@@ -13,7 +13,6 @@
  *= require bootstrap
  *= require fontawesome
  *= require social-share-button
- *= require blog
  *= require nprogress
  *= require nprogress-bootstrap
  *= require rails_bootstrap_forms
@@ -22,8 +21,14 @@
  */
 
 @import "variables.less";
-@import "mixins.less";
+@import "bootswatch.less";
 
+// intro header
+.intro-header {
+  margin-top: 65px;
+}
+
+// Link
 a, a:hover {
   text-decoration: none;
 }
@@ -77,14 +82,6 @@ a, a:hover {
     border-top-left-radius:0;
     border-top-right-radius:0;
   }
-}
-
-li.open .dropdown-menu li a {
-  color: @gray-dark;
-}
-
-li.open .dropdown-menu li a:hover {
-  background-color: @gray-dark;
 }
 
 // shareable style

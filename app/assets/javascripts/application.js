@@ -21,6 +21,7 @@
 //= require nprogress-turbolinks
 //= require parsleyjs
 //= require bootstrap-notify
+//= require bootbox
 //= require_tree .
 //= require turbolinks
 

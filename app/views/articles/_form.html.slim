@@ -1,6 +1,6 @@
 = bootstrap_form_for @article, inline_errors: false do |f|
   = f.text_field :title, wrapper: { class: 'input-group-lg'}, class: 'required'
-  = f.text_area :description, class: 'ckeditor required', data: { no_turbolink: true }
+  = f.text_area :description, class: 'ckeditor'
   = f.text_field :tag_list, label: 'Tags', :value => f.object.tag_list.join(', '), help: 'Enter a comma separated list of tags.', wrapper: { class: 'input-group-lg'}
   = f.select :status, ['Draft', 'Published'], {}, wrapper: { class: 'input-group-lg'}
   - title = @article.id.present? ? "Save Change" : "Save"

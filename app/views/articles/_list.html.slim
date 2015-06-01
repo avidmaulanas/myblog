@@ -1,19 +1,19 @@
 - @articles.each do |article|
     .post-preview
-      h2.post-title 
-        == link_to article.title, article
+      h2.post-title
+        = link_to article.title, article
       p.post-meta
-        | Posted by #{link_to article.user.username, user_path(article.user.id)} on
+        | Posted by #{link_to article.user.full_name, user_path(article.user.slug)} on
         |  #{article.created_at.to_formatted_s(:long_ordinal)}
-      p 
-        == sanitize article.description.truncate(100, sparate: ".") 
+      p
+        = sanitize article.description.truncate(100, sparate: ".")
         - if article.tags.any?
-          span.small Tagged with: 
-          == raw article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "small" }.join(', ') 
+          span.small Tagged with:
+          = raw article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "small" }.join(', ')
 
     - if not @articles.last.id.eql?(article.id)
       hr
 
 /! Pager
 ul.pager
-  li == paginate @articles
+  li = paginate @articles

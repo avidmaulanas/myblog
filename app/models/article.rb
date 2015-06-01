@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
 	extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]
 
-	validates :title, :description, :status, presence: true
+	validates :title, presence: true
 
 	before_save :downcase_status
 
