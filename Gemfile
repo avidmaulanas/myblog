@@ -109,3 +109,6 @@ gem 'bootstrap_form'
 
 # Miscellaneous
 gem 'inherited_resources'
+
+# Bootstrap growl
+gem 'bootstrap-growl-rails'

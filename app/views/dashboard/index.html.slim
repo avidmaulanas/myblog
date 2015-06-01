@@ -1,40 +1,43 @@
 - content_for(:content_dashboard)
 	.container-fluid
-		.page-header 
+		.page-header
 			h1 Dashboard
 
 		.panel.panel-default
-		  .panel-heading
-		    strong All Articles (#{@number_articles})
-		    .pull-right
-			    span.small 
-				  |  Draft (#{@number_articles_draft}) | 
-				  |  Published (#{@number_articles_published})
-		    
+		  .panel-heading.text-right
+		    .small
+		    	| Draft (#{@number_articles_draft})
+					| Published (#{@number_articles_published})
+
 		  .panel-body
 		  	table.table.table-hover.small
 					thead
 						tr
-							th Article
+							th
+								= "#{'Article'.pluralize(@number_articles)}"
+								| &nbsp;
+								span.badge = "#{@number_articles}"
 							th Comment
 							th Status
-							th
+							th.text-center Actions
 					tbody
 					- @articles_all.each do |article|
 						tr
-							td 
-								strong == link_to article.title, article
-								br: span.text-muted
-									| Posted by 
-									i == link_to article.user.username, user_path(article.user.id)
-									|  on 
-									== article.updated_at.to_formatted_s(:long_ordinal)		
-							td == pluralize(article.comments.count, "comment")
-							td == article.status.capitalize
 							td
-								== link_to content_tag(:span, "Edit ", class: "glyphicon glyphicon-edit", title: "Edit"), edit_article_path(article.id), :class => "small"
-								|  | 
-								== link_to content_tag(:span, "Delete", class: "glyphicon glyphicon-trash", title: "Delete"), article, method: :delete, data: { confirm: 'Are you sure?' }, :class => "small"
+								strong = link_to article.title, article
+								br: span.text-muted
+									| Posted by
+									i = link_to article.user.username, user_path(article.user.slug)
+									|  on
+									= article.updated_at.to_formatted_s(:long_ordinal)
+							td = pluralize(article.comments.count, "comment")
+							td = article.status.capitalize
+							td.text-center
+								.btn-group.btn-group-sm
+									= link_to edit_article_path(article.slug), class: 'btn btn-default', data: { toggle: 'tooltip', title: 'Edit article'}
+										i.fa.fa-edit.fa-lg
+									= link_to article, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', title: 'Remove article' }, class: 'btn btn-danger'
+										i.fa.fa-remove.fa-lg
 
 	ul.pager
-		li == paginate @articles_all
+		li = paginate @articles_all

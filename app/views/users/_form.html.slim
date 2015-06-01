@@ -4,8 +4,8 @@
     br
   = f.file_field :avatar
   = f.hidden_field :avatar_cache
-  = f.text_field :username
-  = f.text_field :firstname, label: 'First name'
-  = f.text_field :lastname, label: 'Last name'
-  = f.text_area :biographical_info,  class: 'ckeditor'
+  = f.text_field :username, class: 'required'
+  = f.text_field :firstname, label: 'First name', class: 'required'
+  = f.text_field :lastname, label: 'Last name', class: 'required'
+  = f.text_area :biographical_info,  class: 'ckeditor', wrapper: { data: { no_turbolink: true } }
   = f.submit "Update Profile"
