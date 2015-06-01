@@ -86,3 +86,10 @@ gem 'social-share-button', '~> 0.1.6'
 
 # Upload file
 gem 'carrierwave'
+gem 'mini_magick'
+
+# Access control system
+gem 'action_access'
+
+# Gem ckeditor
+gem 'ckeditor'

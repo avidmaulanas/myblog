@@ -2,6 +2,8 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+    action_access (0.0.2)
+      rails (~> 4.1)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -62,6 +64,13 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    ckeditor (4.1.1)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.5)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -117,6 +126,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.5)
+    mini_magick (4.2.7)
     mini_portile (0.6.2)
     minitest (5.6.1)
     multi_json (1.11.0)
@@ -229,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action_access
   acts-as-taggable-on
   acts_as_commentable
   acts_as_votable (~> 0.10.0)
@@ -237,6 +248,7 @@ DEPENDENCIES
   bullet
   byebug
   carrierwave
+  ckeditor
   coffee-rails (~> 4.1.0)
   devise
   foreman
@@ -245,6 +257,7 @@ DEPENDENCIES
   kaminari
   less-rails
   lol_dba
+  mini_magick
   pg
   pry-byebug
   pry-rails
