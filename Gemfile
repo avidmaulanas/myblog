@@ -93,3 +93,6 @@ gem 'action_access'
 
 # Gem ckeditor
 gem 'ckeditor'
+
+# Frindly ID
+gem 'friendly_id'
