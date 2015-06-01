@@ -1,13 +1,15 @@
 @parsley_form = ->
-  $('form[role="form"]').parsley
-    successClass: "has-success"
-    errorClass: "has-error"
-    classHandler: (el) ->
-      el.$element.closest(".form-group")
-    errorsContainer: (el) ->
-      el.$element.closest(".form-group")
-    errorsWrapper: "<span class='help-block'></span>"
-    errorTemplate: "<span></span>"
+  form = $('form[role="form"]')
+  if form.length > 0
+    form.parsley
+      successClass: "has-success"
+      errorClass: "has-error"
+      classHandler: (el) ->
+        el.$element.closest(".form-group")
+      errorsContainer: (el) ->
+        el.$element.closest(".form-group")
+      errorsWrapper: "<span class='help-block'></span>"
+      errorTemplate: "<span></span>"
   return
 
 # when our document is ready, call our ready function
