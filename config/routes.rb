@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
   get 'dashboard' => 'dashboard#index'
 
   get 'comments/create'

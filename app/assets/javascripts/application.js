@@ -15,6 +15,6 @@
 //= require turbolinks
 //= require social-share-button
 //= require bootstrap
-//= require ckeditor
+//= require ckeditor/init
 //= require blog
 //= require abuse_reports
