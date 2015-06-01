@@ -4,34 +4,34 @@
     .row
       .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
         .post-heading
-          h1 == @article.title
+          h1 = @article.title
           span.meta
             | Posted by #{link_to @article.user.username, user_path(@article.user.id)} on
             |  #{@article.created_at.to_formatted_s(:long_ordinal)}
 
 / article description
-== sanitize @article.description
+= sanitize @article.description
 hr
 - if @article.tags.any?
   div.pull-left
-  	span.small Tagged with: 
-  	span.small == raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "tags" }.join(', ') 
+  	span.small Tagged with:
+  	span.small = raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "tags" }.join(', ')
 
 
 / rate
-div.pull-right 
+div.pull-right
   .small
     = link_to "Upvote", upvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
-    == "&nbsp;".html_safe
+    = "&nbsp;".html_safe
     span.upvote class="badge" = @article.get_up_votes.size
-    == "&nbsp;".html_safe
+    = "&nbsp;".html_safe
     = link_to "Downvote", downvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
-    == "&nbsp;".html_safe
+    = "&nbsp;".html_safe
     span.downvote class="badge" = @article.get_down_votes.size
 
 .clearfix
 / share
-hr		
+hr
 .pull-left.small
 	| Share: #{social_share_button_tag(@article.title, 'data-popup' => true)}
 .clearfix
@@ -44,34 +44,27 @@ hr
 .media
 	.media-left.pull-left
 		- if @article.user.avatar_url.split('/')[5].eql?("default_profile_pic.jpg")
-			== image_tag("default_profile_pic.jpg", size: "64", class: "img-rounded")	
+			= image_tag("default_profile_pic.jpg", size: "64", class: "img-rounded")
 		- else
-			== image_tag(@article.user.avatar_url, size: "64", class: "img-rounded")			
+			= image_tag(@article.user.avatar_url, size: "64", class: "img-rounded")
 	.media-body
-		h4.media-heading == link_to "#{@article.user.firstname} #{@article.user.lastname}", user_path(@article.user.id)
-		.small == @article.user.biographical_info
+		h4.media-heading = link_to "#{@article.user.firstname} #{@article.user.lastname}", user_path(@article.user.id)
+		.small = @article.user.biographical_info.html_safe
 hr
 .pull-right.small
-	== link_to "Report Abuse", {:controller => "abuse_reports", :action => "new", :article_id => @article.id}, 'data-popup' => true, :class => "small"
+	= link_to "Report Abuse", new_article_abuse_report_path(@article.slug), remote: true
 
 .clearfix
 
 /! form comment
 h3 Comments
-- if @article.errors.any?
-  #error_explanation
-    h2.small.text-danger = "#{pluralize(@article.errors.count, "error")} prohibited this user from being saved:"
-    ul.small.text-danger
-      - @article.errors.full_messages.each do |message|
-        li.small = message
-= form_for [@article, @comment] do |f|
+= bootstrap_form_for [@article, @comment] do |f|
 	- unless user_signed_in?
-		.form-group = f.text_field :name, placeholder: "Name", :class => "form-control"
-		.form-group = f.email_field :email, placeholder: "Email", :class => "form-control"
+		= f.text_field :name, placeholder: "Name", class: 'required'
+		= f.email_field :email, placeholder: "Email", class: 'required'
 
-	.form-group = f.text_area :comment, size: "5x6",placeholder: "Comments..", :class => "form-control"
-	
-	= f.submit "Post Comment", :class => "btn btn-default" 
+	= f.text_area :comment, hide_label: true, rows: "5", placeholder: "Comments..", class: 'required'
+	= f.submit "Post Comment"
 
 /! list of comments
 br
@@ -79,8 +72,10 @@ br
 	.small.well
 		span: strong #{comment.name}
 		span.small.pull-right.text-muted: em #{time_ago_in_words comment.created_at} ago
-		p == sanitize simple_format(comment.comment)
+		p = sanitize simple_format(comment.comment)
 
 		- if user_signed_in? and current_user.id.eql?(@article.user_id)
-			== link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small text-danger"
+			= link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small text-danger"
 
+
+#j-modal-container

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments
-    resources :abuse_reports
+    resources :abuse_reports, path: 'abuse-report'
 
     member do
       put "upvote", to: "articles#upvote"

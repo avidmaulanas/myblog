@@ -1,20 +1,6 @@
-
-= form_for [@article, @abuse_report] do |f|
-  - if @abuse_report.errors.any?
-    #error_explanation
-      h2.small.text-danger = "#{pluralize(@abuse_report.errors.count, "error")} prohibited this Report Abuse from being saved:"
-      ul.small.text-danger
-        - @abuse_report.errors.full_messages.each do |message|
-          li.small = message
-  .form-group
-    = f.label :email, "Your email"
-    = f.email_field :email, :class => "form-control"
-  .form-group
-    = f.label :title
-    = f.text_field :title, :class => "form-control"
-  .form-group
-    = f.label :description
-    = f.text_area :description, :rows => "6", :class => "form-control"
-
-  == f.submit "Post Report", :class => "btn btn-default"
+= bootstrap_form_for [@article, @abuse_report], inline_errors: false do |f|
+  = f.email_field :email, class: 'required'
+  = f.text_field :title, class: 'required'
+  = f.text_area :description, class: 'ckeditor required'
+  = f.submit "Post Report"
 

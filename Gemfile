@@ -51,6 +51,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-fontawesome'
   gem 'rails-assets-ckeditor'
+  gem 'rails-assets-parsleyjs'
 end
 
 # Puma as the app server
@@ -102,3 +103,9 @@ gem 'nprogress-rails'
 
 # JQuery Turbolinks
 gem 'jquery-turbolinks'
+
+# Bootstrap Form
+gem 'bootstrap_form'
+
+# Miscellaneous
+gem 'inherited_resources'

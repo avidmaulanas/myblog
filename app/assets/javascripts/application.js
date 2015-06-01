@@ -19,11 +19,6 @@
 //= require_tree ./ckeditor
 //= require nprogress
 //= require nprogress-turbolinks
+//= require parsleyjs
 //= require_tree .
 //= require turbolinks
-
-NProgress.configure({
-  showSpinner: false,
-  ease: 'ease',
-  speed: 500
-});

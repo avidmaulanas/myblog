@@ -1,11 +1,11 @@
 class AbuseReportsController < InheritedResources::Base
-	skip_before_filter :authenticate_user!, :only => [:new, :create]
-	before_action :authenticate_admin_user!, :only => [:index, :show, :edit, :update, :destroy]
+	skip_before_filter :authenticate_user!, only: [:new, :create]
+	before_action :authenticate_admin_user!, only: [:index, :show, :edit, :update, :destroy]
 	# GET /abuse_reports
   # GET /abuse_reports.json
   def index
     @abuse_reports = AbuseReport.all
-    render :layout => 'abuse_report' 
+    render layout: 'abuse_report'
   end
 
   # GET /abuse_reports/1
@@ -16,8 +16,8 @@ class AbuseReportsController < InheritedResources::Base
   # GET /abuse_reports/new
   def new
   	@article = Article.find(params[:article_id])
-    @abuse_report = AbuseReport.new   
-    render :layout => 'abuse_report' 
+    @abuse_report = @article.abuse_reports.new
+    render layout: 'abuse_report'
   end
 
   # GET /abuse_reports/1/edit
@@ -28,8 +28,8 @@ class AbuseReportsController < InheritedResources::Base
   # POST /abuse_reports.json
   def create
     @abuse_report = AbuseReport.new(abuse_report_params)
-    @abuse_report.article_id = params[:article_id]
-    @article = Article.find(params[:article_id])
+    @article = Article.where(slug: params[:article_id]).select(:id, :slug).first
+    @abuse_report.article_id = @article.id
     respond_to do |format|
       if @abuse_report.save
         format.html { redirect_to @article, notice: 'Report Abuse was successfully posted.' }
@@ -67,7 +67,7 @@ class AbuseReportsController < InheritedResources::Base
 
   private
     def abuse_report_params
-      params.require(:abuse_report).permit(:email, :title, :description, :article_id)
+      params.require(:abuse_report).permit(:email, :title, :description)
     end
 end
 

@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
 
-  include ActsAsCommentable::Comment  
+  include ActsAsCommentable::Comment
 
   validates :name, :email, :comment, presence: true
 
@@ -14,5 +14,5 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a article
   belongs_to :article
   belongs_to :commentable, :polymorphic => true
-  
+
 end

@@ -16,6 +16,7 @@
  *= require blog
  *= require nprogress
  *= require nprogress-bootstrap
+ *= require rails_bootstrap_forms
  *= require_self
  */
 
@@ -132,3 +133,9 @@ nav.share {
 .gi-2x{font-size: 2em;}
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
+
+// Required
+label.required:before {
+  content:"* ";
+  color: gold;
+}

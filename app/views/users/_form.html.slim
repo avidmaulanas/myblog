@@ -1,28 +1,11 @@
-= form_for @user, :html => { :multipart => true } do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2.small.text-danger = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      ul.small.text-danger
-        - @user.errors.full_messages.each do |message|
-          li.small = message
-
-  .form-group.input-group-lg
-    = f.label :username
-    = f.text_field :username, :class => "form-control"
-  .form-group.input-group-lg
-    = f.label :firstname
-    = f.text_field :firstname, :class => "form-control"
-  .form-group.input-group-lg
-    = f.label :lastname
-    = f.text_field :lastname, :class => "form-control"
-  .form-group
-    = f.label :biographical_info
-    = f.text_area :biographical_info, :class => "form-control", :rows => "5"
-  .form-group
-    == f.label :avatar, "Avatar:" 
-    br == image_tag(@user.avatar_url, size: "160", class: "img-rounded") if @user.avatar? 
+= bootstrap_form_for @user, html: { multipart: true } do |f|
+  = f.label :avatar, "Avatar:"
+    br = image_tag(@user.avatar_url, size: "160", class: "img-circle") if @user.avatar?
     br
-    == f.file_field :avatar 
-    == f.hidden_field :avatar_cache 
-
-  = f.submit "Update Profile", :class => "btn btn-default"
+  = f.file_field :avatar
+  = f.hidden_field :avatar_cache
+  = f.text_field :username
+  = f.text_field :firstname, label: 'First name'
+  = f.text_field :lastname, label: 'Last name'
+  = f.text_area :biographical_info,  class: 'ckeditor'
+  = f.submit "Update Profile"
