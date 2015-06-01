@@ -53,6 +53,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-ckeditor'
 end
 
+# Puma as the app server
+gem 'puma'
+gem 'foreman'
+
 # database
 gem 'pg'
 
