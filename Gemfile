@@ -96,3 +96,6 @@ gem 'ckeditor'
 
 # Frindly ID
 gem 'friendly_id'
+
+# NProgress
+gem 'nprogress-rails'

@@ -17,5 +17,13 @@
 //= require bootstrap
 //= require ckeditor/init
 //= require_tree ./ckeditor
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
 
+
+NProgress.configure({
+  showSpinner: false,
+  ease: 'ease',
+  speed: 500
+});
