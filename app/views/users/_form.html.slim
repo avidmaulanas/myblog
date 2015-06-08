@@ -1,11 +1,18 @@
 = bootstrap_form_for @user, html: { multipart: true } do |f|
-  = f.label :avatar, "Avatar:"
-    br = image_tag(@user.avatar_url, size: "160", class: "img-circle") if @user.avatar?
-    br
-  = f.file_field :avatar
+  .img-avatar
+    = image_tag(@user.avatar_url, size: "160", class: "img-circle") if @user.avatar?
+  .img-preview
   = f.hidden_field :avatar_cache
+  = f.file_field :avatar, label: false, class: 'avatar'
+  = f.hidden_field :avatar_crop_x
+  = f.hidden_field :avatar_crop_y
+  = f.hidden_field :avatar_crop_w
+  = f.hidden_field :avatar_crop_h
+
   = f.text_field :username, class: 'required'
   = f.text_field :firstname, label: 'First name', class: 'required'
   = f.text_field :lastname, label: 'Last name', class: 'required'
   = f.text_area :biographical_info,  class: 'ckeditor', wrapper: { data: { no_turbolink: true } }
   = f.submit "Update Profile"
+
+= render 'partials/modal_crop'

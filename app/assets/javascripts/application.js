@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.jcrop
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require social-share-button
@@ -22,6 +23,7 @@
 //= require parsleyjs
 //= require bootstrap-notify
 //= require bootbox
+//= require cropper
 //= require_tree .
 //= require turbolinks
 

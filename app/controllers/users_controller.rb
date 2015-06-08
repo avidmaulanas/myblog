@@ -41,6 +41,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    if params[:user][:avatar].present?
+      @user.avatar_crop_x = params[:user][:avatar_crop_x]
+      @user.avatar_crop_y = params[:user][:avatar_crop_y]
+      @user.avatar_crop_w = params[:user][:avatar_crop_w]
+      @user.avatar_crop_h = params[:user][:avatar_crop_h]
+      @user.avatar = params[:user][:avatar]
+      @user.save
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
@@ -70,7 +79,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :firstname, :lastname, :biographical_info, :avatar, :avatar_cache)
+      params.require(:user).permit(:username, :firstname, :lastname, :biographical_info,
+        :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h, :avatar, :avatar_cache)
     end
 
 end
