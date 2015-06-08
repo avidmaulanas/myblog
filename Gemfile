@@ -52,6 +52,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-fontawesome'
   gem 'rails-assets-ckeditor'
   gem 'rails-assets-parsleyjs'
+  gem 'rails-assets-cropper'
 end
 
 # Puma as the app server
@@ -87,6 +88,8 @@ gem 'social-share-button', '~> 0.1.6'
 
 # Upload file
 gem 'carrierwave'
+gem 'carrierwave-crop'
+gem 'carrierwave_backgrounder'
 gem 'mini_magick'
 
 # Access control system
@@ -115,3 +118,6 @@ gem 'bootstrap-growl-rails'
 
 # Bootbox as alert message
 gem 'bootbox-rails'
+
+# Background process
+gem 'sidekiq'

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :firstname, :lastname, presence: true
 
  	mount_uploader :avatar, AvatarUploader
+  crop_uploaded :avatar
+  process_in_background :avatar
 
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
