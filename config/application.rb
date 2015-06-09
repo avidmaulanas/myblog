@@ -25,5 +25,11 @@ module Myblog
 
     # Load ckeditor models
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
+    config.assets.enabled = true
+    config.assets.precompile += Ckeditor.assets
+    config.assets.precompile = [ Proc.new { |path|
+       !File.extname(path).in?(['.js', '.css', ''])
+    }, /(?:\/|\\|\A)application\.(css|js)$/ ]
   end
 end
