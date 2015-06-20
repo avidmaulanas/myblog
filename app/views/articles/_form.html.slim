@@ -6,3 +6,6 @@
   - title = @article.id.present? ? "Save Change" : "Save"
   = f.submit title
 
+  - if type.eql?('edit')
+    = link_to 'Cancel', @article, class: 'btn btn-link'
+
