@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   private
     def configure_devise_params
       devise_parameter_sanitizer.for(:sign_up) do |u|
-        u.permit(:username, :email, :password, :password_confirmation)
+        u.permit(:email, :password)
       end
     end
 
@@ -52,14 +52,14 @@ class ApplicationController < ActionController::Base
       root_path
   	end
 
-    def check_subdomain
-      if current_user.respond_to?("username")
-        unless request.subdomain.eql?(current_user.username)
-          redirect_to controller: request.params[:controller], subdomain: current_user.username
-        end
-      end
-      if request.params[:controller].eql?("home")
-        redirect_to root_url :subdomain => nil
-      end
-    end
+    # def check_subdomain
+    #   if current_user.respond_to?("username")
+    #     unless request.subdomain.eql?(current_user.username)
+    #       redirect_to controller: request.params[:controller], subdomain: current_user.username
+    #     end
+    #   end
+    #   if request.params[:controller].eql?("home")
+    #     redirect_to root_url :subdomain => nil
+    #   end
+    # end
 end
