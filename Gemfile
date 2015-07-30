@@ -44,6 +44,8 @@ group :development, :test do
   gem 'bullet'
   gem 'lol_dba'
   gem 'pry-rails'
+
+  gem 'letter_opener_web'
 end
 
 # Assets

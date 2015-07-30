@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get 'tagged' => 'articles#tagged', :as => 'tagged'
   resources :users
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/mail"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
