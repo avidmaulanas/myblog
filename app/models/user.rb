@@ -9,12 +9,14 @@ class User < ActiveRecord::Base
 
  	has_many :articles
 
-  validates :email, presence: true, uniqueness: true
- 	validates :password, presence: true
+  validates :email, presence: true, format: { with: Devise.email_regexp }
+ 	validates :password, :password_confirmation, length: Devise.password_length, if: :password_required?
   validates :firstname, :lastname, presence: true, on: :update
 
- 	mount_uploader :avatar, AvatarUploader
-  crop_uploaded :avatar
+  attr_accessor :password_required
+
+ 	mount_uploader  :avatar, AvatarUploader
+  crop_uploaded   :avatar
   process_in_background :avatar
 
   before_create :set_slug
@@ -24,6 +26,10 @@ class User < ActiveRecord::Base
   friendly_id :username, use: [:slugged, :finders]
 
  	scope :recent, ->(n) { order("created_at DESC").limit(n) }
+
+
+
+
 
  	def self.current
     Thread.current[:user]
@@ -49,4 +55,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  private
+    def password_required?
+      self.password_required || false
+    end
 end
