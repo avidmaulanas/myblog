@@ -7,9 +7,8 @@
 
 	h3 = @user.username
 	p = @user.full_name
-	p.small = @user.biographical_info.html_safe
+	p.small = @user.biographical_info.html_safe rescue ''
 
 	- if user_signed_in?
 		br
 		span.small #{link_to 'Edit', edit_user_path(@user)}
-
