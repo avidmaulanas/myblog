@@ -50,6 +50,7 @@ class UsersController < ApplicationController
       @user.save
     end
 
+    @user.slug = nil
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Profile was successfully updated.' }

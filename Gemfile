@@ -52,7 +52,8 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-fontawesome'
-  gem 'rails-assets-ckeditor'
+  # gem 'rails-assets-ckeditor'
+  # gem 'rails-assets-tinymce'
   gem 'rails-assets-parsleyjs'
   gem 'rails-assets-cropper'
 end
@@ -119,3 +120,6 @@ gem 'bootbox-rails'
 
 # Background process
 gem 'sidekiq'
+
+# Rich text editor
+gem 'tinymce-rails'

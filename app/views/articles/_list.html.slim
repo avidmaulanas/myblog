@@ -1,10 +1,9 @@
 - @articles.each do |article|
     .post-preview
-      h2.post-title
-        = link_to article.title, article
-      p.post-meta
-        | Posted by #{link_to article.user.full_name, user_path(article.user.slug)} on
-        |  #{article.created_at.to_formatted_s(:long_ordinal)}
+      .post-title
+        h2 = link_to article.title, article
+      .post-author
+        = post_author(article)
       p
         = sanitize article.description.truncate(100, sparate: ".")
         - if article.tags.any?
@@ -17,3 +16,5 @@
 /! Pager
 ul.pager
   li = paginate @articles
+
+= render 'empty' if @articles.empty?

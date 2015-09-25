@@ -16,8 +16,6 @@
 //= require jquery_ujs
 //= require social-share-button
 //= require bootstrap
-//= require ckeditor/init
-//= require_tree ./ckeditor
 //= require nprogress
 //= require nprogress-turbolinks
 //= require parsleyjs
@@ -25,7 +23,6 @@
 //= require bootbox
 //= require cropper
 //= require_tree .
-//= require turbolinks
 
 if ($('.ckeditor')[0]) {
   CKEDITOR.replace($('.ckeditor').attr('id'));

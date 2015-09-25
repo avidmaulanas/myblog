@@ -1,9 +1,7 @@
 .page-header: h1 Profile
 .jumbotron.text-center
-	- if @user.avatar_url.split('/')[5].eql?("default_profile_pic.jpg")
-		= image_tag("default_profile_pic.jpg", size: "200", class: "img-circle")
-	- else
-		= image_tag(@user.avatar_url, size: "200", class: "img-circle")
+	= image_tag("default_profile_pic.jpg", size: "200", class: "img-circle")
+	= avatar_with_size(current_user, '180')
 
 	h3 = @user.username
 	p = @user.full_name

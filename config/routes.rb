@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-
-  mount Ckeditor::Engine => '/ckeditor'
   get 'dashboard' => 'dashboard#index'
 
   get 'comments/create'
 
-  root 'home#index'
+  root 'articles#index'
 
   devise_for :users, skip: [:sessions]
 
@@ -22,8 +20,8 @@ Rails.application.routes.draw do
     resources :abuse_reports, path: 'abuse-report'
 
     member do
-      put "upvote", to: "articles#upvote"
-      put "downvote", to: "articles#downvote"
+      put "like", to: "articles#upvote"
+      put "dislike", to: "articles#downvote"
     end
   end
 

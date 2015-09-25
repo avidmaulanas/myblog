@@ -1,17 +1,19 @@
-== form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin"}) do |f| 
-  
-  h2.form-signin-heading Log in
-  == f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email" 
-  == f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password"  
+.row
+  .container
+    .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+      .content-no-head
+        == form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin"}) do |f|
 
-  - if devise_mapping.rememberable?
-    .checkbox
-      label
-        == f.check_box :remember_me
-        span.small Remember me      
+          h2.form-signin-heading Log in
+          == f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email"
+          == f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password"
 
-  == f.submit "Log in", :class => "btn btn-primary btn-block"
+          - if devise_mapping.rememberable?
+            .checkbox
+              label
+                == f.check_box :remember_me
+                span.small Remember me
 
-  == render "devise/shared/links" 
+          == f.submit "Log in", :class => "btn btn-primary btn-block"
 
-  
+          == render "devise/shared/links" 
