@@ -19,17 +19,13 @@ class User < ActiveRecord::Base
   crop_uploaded   :avatar
   process_in_background :avatar
 
-  before_create :set_slug
-
   extend FriendlyId
 
-  friendly_id :username, use: [:slugged, :finders]
+  friendly_id :slug_name, use: [:slugged, :finders]
 
  	scope :recent, ->(n) { order("created_at DESC").limit(n) }
 
-
-
-
+  before_save :set_avatar
 
  	def self.current
     Thread.current[:user]
@@ -40,23 +36,40 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{firstname} #{lastname}"
+    if firstname.present? or lastname.present?
+      [firstname, lastname].join(" ")
+    else
+      self.username || self.email
+    end
   end
 
-  def set_slug
-    self.slug = [*('a'..'z'),*('0'..'9')].shuffle[0,8].join
+  def slug_name
+    self.username || slug_random
   end
 
   def should_generate_new_friendly_id?
-    if !slug? || username_changed?
-      true
-    else
-      false
-    end
+    slug.blank? || username_changed?
   end
 
   private
     def password_required?
       self.password_required || false
+    end
+
+    def slug_random
+      [*('a'..'z'),*('0'..'9')].shuffle[0,8].join
+    end
+
+    def set_avatar
+      self.avatar = generate_avatar if self.avatar.blank?
+    end
+
+    def generate_avatar
+      img = Avatarly.generate_avatar(self.full_name, opts={size: 400})
+      dir = "public/uploads/tmp"
+      File.open("#{dir}/avatar.png", 'wb') do |f|
+        f.write img
+      end
+      File.open("#{Rails.root}/#{dir}/avatar.png")
     end
 end

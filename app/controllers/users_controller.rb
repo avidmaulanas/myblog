@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to profile_url, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     @user.slug = nil
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to profile_url, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user || User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

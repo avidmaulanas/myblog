@@ -1,6 +1,5 @@
 .page-header: h1 Profile
 .jumbotron.text-center
-	= image_tag("default_profile_pic.jpg", size: "200", class: "img-circle")
 	= avatar_with_size(current_user, '180')
 
 	h3 = @user.username
@@ -9,4 +8,4 @@
 
 	- if user_signed_in?
 		br
-		span.small #{link_to 'Edit', edit_user_path(@user)}
+		span.small #{link_to 'Edit', profile_edit_path}

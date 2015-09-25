@@ -5,12 +5,14 @@ Rails.application.routes.draw do
 
   root 'articles#index'
 
-  devise_for :users, skip: [:sessions]
-
+  devise_for  :users, skip: [:sessions]
+  resources   :users, except: [:show, :edit]
   as :user do
-    get 'login' => 'devise/sessions#new', as: :new_user_session
-    post 'login' => 'devise/sessions#create', as: :user_session
-    delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
+    get     'login',        to: 'devise/sessions#new', as: :new_user_session
+    post    'login' ,       to:'devise/sessions#create', as: :user_session
+    delete  'logout',       to: 'devise/sessions#destroy', as: :destroy_user_session
+    get     'profile',      to: 'users#show'
+    get     'profile/edit', to: 'users#edit'
   end
 
   post 'rate' => 'articles#rate'
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   get 'tagged' => 'articles#tagged', :as => 'tagged'
-  resources :users
+
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/mail"

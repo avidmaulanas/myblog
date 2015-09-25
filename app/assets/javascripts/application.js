@@ -24,10 +24,6 @@
 //= require cropper
 //= require_tree .
 
-if ($('.ckeditor')[0]) {
-  CKEDITOR.replace($('.ckeditor').attr('id'));
-}
-
 $(function () {
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body'

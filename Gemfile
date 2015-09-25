@@ -123,3 +123,6 @@ gem 'sidekiq'
 
 # Rich text editor
 gem 'tinymce-rails'
+
+# Avatar generator
+gem 'avatarly'
