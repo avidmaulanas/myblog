@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     delete  'logout',       to: 'devise/sessions#destroy', as: :destroy_user_session
     get     'profile',      to: 'users#show'
     get     'profile/edit', to: 'users#edit'
+    delete  'profile/avatar', to: 'users#remove_avatar'
   end
 
   post 'rate' => 'articles#rate'

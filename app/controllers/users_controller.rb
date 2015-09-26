@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :remove_avatar]
   skip_before_filter :authenticate_user!, :only => [:show]
 
   # GET /users
@@ -70,6 +70,12 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def remove_avatar
+    @user.remove_avatar!
+    @user.save
+    redirect_to profile_url, notice: 'Avatar was successfully removed.'
   end
 
   private

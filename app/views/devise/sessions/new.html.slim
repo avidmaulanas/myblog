@@ -1,19 +1,18 @@
-.row
-  .container
-    .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
-      .content-no-head
-        == form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin"}) do |f|
+.container
+  .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+    .content-no-head
+      == form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-signin"}) do |f|
 
-          h2.form-signin-heading Log in
-          == f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email"
-          == f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password"
+        h2.form-signin-heading Log in
+        == f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email"
+        == f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password"
 
-          - if devise_mapping.rememberable?
-            .checkbox
-              label
-                == f.check_box :remember_me
-                span.small Remember me
+        - if devise_mapping.rememberable?
+          .checkbox
+            label
+              == f.check_box :remember_me
+              span.small Remember me
 
-          == f.submit "Log in", :class => "btn btn-primary btn-block"
+        == f.submit "Log in", :class => "btn btn-primary btn-block"
 
-          == render "devise/shared/links" 
+        == render "devise/shared/links"

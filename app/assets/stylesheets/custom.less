@@ -3,6 +3,10 @@
   margin-top: 65px;
 }
 
+.row {
+  margin: 0;
+}
+
 // Link
 a, a:hover {
   text-decoration: none;
@@ -122,12 +126,21 @@ label.required:before {
   padding: 20px 0 20px 0;
 }
 
+.post-preview {
+  h1, h2 {
+    font-family: @font-family-serif;
+  }
+}
+
 .post-head {
+  margin-top: 65px;
   background-color: @gray-lighter;
   text-align: center;
   height: 300px;
-  margin-top: 65px;
   padding: 50px 10px 50px 10px;
+  h1, h2 {
+    font-family: @font-family-serif;
+  }
 }
 
 .post-author {
@@ -136,8 +149,14 @@ label.required:before {
 }
 
 .post-content {
+  top: 65px;
   font-size: 18px;
   padding-top: 25px;
+  font-family: @font-family-serif;
+}
+
+.post-btn-edit {
+  padding-top: 10px;
 }
 
 .votes {
@@ -155,10 +174,30 @@ label.required:before {
   padding-right: 5px;
 }
 
+.notif-alert {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: @font-family-sans-serif;
+  /* Margin bottom by footer height */
+  margin-bottom: 200px;
+}
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 200px;
+  padding-top: 20px;
   background-color: @brand-primary;
   font-size: @font-size-small;
-  font-family: @font-family-sans-serif;
-  padding-top: 20px;
-  height: 300px;
 }

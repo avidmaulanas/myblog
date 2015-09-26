@@ -4,11 +4,11 @@
         h2 = link_to article.title, article
       .post-author
         = post_author(article)
-      p
+      .post-content
         = sanitize article.description.truncate(100, sparate: ".")
+
         - if article.tags.any?
-          span.small Tagged with:
-          = raw article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "small" }.join(', ')
+          .small Tagged with: #{link_tags(article.tags)}
 
     - if not @articles.last.id.eql?(article.id)
       hr
