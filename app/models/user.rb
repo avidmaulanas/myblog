@@ -10,10 +10,11 @@ class User < ActiveRecord::Base
  	has_many :articles
 
   validates :email, presence: true, format: { with: Devise.email_regexp }
- 	validates :password, :password_confirmation, length: Devise.password_length, if: :password_required?
-  validates :firstname, :lastname, presence: true, on: :update
+ 	validates :password, length: Devise.password_length, unless: :skip_on_account?
+ 	validates :password_confirmation, length: Devise.password_length, unless: [ :skip_on_account?, :skip_on_signup? ]
+  validates :firstname, :lastname, presence: true, on: :update, unless: [ :skip_on_account?, :skip_on_signup? ]
 
-  attr_accessor :password_required
+  attr_accessor :password_required, :account_required, :signup_required
 
  	mount_uploader  :avatar, AvatarUploader
   crop_uploaded   :avatar
@@ -52,6 +53,14 @@ class User < ActiveRecord::Base
   end
 
   private
+    def skip_on_account?
+      self.account_required || true
+    end
+
+    def skip_on_signup?
+      self.signup_required || true
+    end
+
     def password_required?
       self.password_required || false
     end

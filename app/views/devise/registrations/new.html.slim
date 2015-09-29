@@ -11,10 +11,6 @@
         .form-group.input-group-lg
           - if @validatable
             = f.password_field :password, autocomplete: "off"
-            span.small.block-help: em #{@minimum_password_length} characters minimum
-
-        / .form-group.input-group-lg
-        /   = f.password_field :password_confirmation, autocomplete: "off"
 
         .form-group
             = f.submit "Sign up"

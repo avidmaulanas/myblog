@@ -5,15 +5,28 @@ Rails.application.routes.draw do
 
   root 'articles#index'
 
-  devise_for  :users, skip: [:sessions]
+  devise_for  :users, skip: [:sessions, :registrations]
   resources   :users, except: [:show, :edit]
+
   as :user do
-    get     'login',        to: 'devise/sessions#new', as: :new_user_session
-    post    'login' ,       to:'devise/sessions#create', as: :user_session
-    delete  'logout',       to: 'devise/sessions#destroy', as: :destroy_user_session
-    get     'profile',      to: 'users#show'
-    get     'profile/edit', to: 'users#edit'
-    delete  'profile/avatar', to: 'users#remove_avatar'
+    # devise/sessions
+    get     'login',            to: 'devise/sessions#new',      as: :new_user_session
+    post    'login' ,           to: 'devise/sessions#create',   as: :user_session
+    delete  'logout',           to: 'devise/sessions#destroy',  as: :destroy_user_session
+
+    # devise/registrations
+    get     'signup',           to: 'devise/registrations#new',     as: :new_user_registration
+    post    'signup',           to: 'devise/registrations#create',  as: :user_registration
+    delete  'profile/account',  to: 'devise/registrations#destroy'
+
+    # users
+    get     'profile',          to: 'users#show'
+    get     'profile/edit',     to: 'users#edit'
+    delete  'profile/avatar',   to: 'users#remove_avatar'
+    get     'profile/account',  to: 'users#account'
+    patch   'profile/account',  to: 'users#account_update'
+    get     'profile/password', to: 'users#password'
+    patch   'profile/password', to: 'users#password_update'
   end
 
   post 'rate' => 'articles#rate'
