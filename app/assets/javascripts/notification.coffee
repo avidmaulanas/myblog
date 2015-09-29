@@ -5,7 +5,7 @@
     element: 'body'
     type: type
     showProgressbar: true
-    delay: 10000
+    delay: 5000
     offset: 65
     placement:
       from: "top"
@@ -21,4 +21,3 @@
 $ ->
   message = $('.notification').data('message')
   notif message, $('.notification').data('type') if message?
-

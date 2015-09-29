@@ -1,15 +1,18 @@
 .container
   .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
     .content-no-head
-      .page-header
-        h1 Profile
+      h1 Profile
       .jumbotron.text-center
-      	= avatar_with_size(current_user, '180')
-        p.small = link_to "Remove avatar", profile_avatar_path, method: :delete, data: { confirm: 'Are you sure?' }
-      	h3 = @user.username
-      	p = @user.full_name
-      	p.small = @user.biographical_info.html_safe rescue ''
+        .profile-avatar
+          = avatar_with_size(current_user, '180')
 
-      	- if user_signed_in?
-      		br
-      		span.small #{link_to 'Edit', profile_edit_path}
+      	.profile-content
+          h3 = @user.username
+          p = @user.full_name
+          p.small
+            = @user.biographical_info.html_safe rescue ''
+          - if user_signed_in? and current_user.id.eql?(@user.id)
+          	br
+            = link_to 'Edit profile', profile_edit_path, class: "btn btn-default", role: "button"
+            = link_to "Remove avatar", profile_avatar_path, method: :delete,
+              data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-inline", role: "button"
