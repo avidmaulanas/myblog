@@ -49,6 +49,8 @@ html
               li = link_to "Sign up", new_user_registration_path
 
     = flash_messages
+    = tinymce_assets
+    = tinymce :alternate
     = yield
 
     / .row

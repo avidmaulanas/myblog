@@ -1,5 +1,3 @@
-= tinymce_assets
-= tinymce :alternate
 = bootstrap_form_for @article, inline_errors: false do |f|
   = f.text_field :title, wrapper: { class: 'input-group-lg'}, class: 'required'
   = f.text_area :description, class: 'tinymce', rows: 10, cols: 120

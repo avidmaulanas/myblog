@@ -52,8 +52,6 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-fontawesome'
-  # gem 'rails-assets-ckeditor'
-  # gem 'rails-assets-tinymce'
   gem 'rails-assets-parsleyjs'
   gem 'rails-assets-cropper'
 end
@@ -93,9 +91,6 @@ gem 'mini_magick'
 
 # Access control system
 gem 'action_access'
-
-# Gem ckeditor
-gem 'ckeditor'
 
 # Frindly ID
 gem 'friendly_id'
