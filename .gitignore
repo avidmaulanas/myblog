@@ -17,5 +17,6 @@
 /tmp
 
 /public
+/.env
 
 dump.rdb
