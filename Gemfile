@@ -121,3 +121,5 @@ gem 'tinymce-rails'
 
 # Avatar generator
 gem 'avatarly'
+
+gem 'rails_12factor', group: :production
