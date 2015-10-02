@@ -1,81 +1,76 @@
-= content_for :header_article
-  header.intro-header
-   .container
-    .row
+.row
+  .post-head
+    .post-title
+      h1 = @article.title
+    .post-author
+      = post_author(@article)
+    - if user_signed_in?
+      .post-btn-edit
+        = link_to 'Edit article', edit_article_path(@article), class: 'btn btn-default'
+
+.row
+  .container
+    .post-content
       .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
-        .post-heading
-          h1 = @article.title
-          span.meta
-            | Posted by #{link_to @article.user.full_name, user_path(@article.user.slug)} on
-            |  #{@article.created_at.to_formatted_s(:long_ordinal)}
+        / article description
+        = sanitize @article.description
+        hr
+        - if @article.tags.any?
+          .small Tagged with: #{link_tags(@article.tags)}
 
-/ article description
-= sanitize @article.description
-hr
-- if @article.tags.any?
-  div.pull-left
-  	span.small Tagged with:
-  	span.small = raw @article.tags.map { |tag| link_to "#{tag.name}", tagged_url(:tag => tag.name), :class => "tags" }.join(', ')
+        hr
+        .votes.pull-left
+          span.btn-vote
+            = link_to like_article_path(@article), method: :put, remote: user_signed_in?,
+              class: 'btn-vote', data: { toggle: 'tooltip', title: 'I like this'}
+              i.fa.fa-thumbs-o-up
+            span#js-like = @article.get_up_votes.size
+          span.btn-vote
+            = link_to dislike_article_path(@article), method: :put, remote: user_signed_in?,
+              class: 'btn-vote', data: { toggle: 'tooltip', title: 'I dislike this'}
+              i.fa.fa-thumbs-o-down
+            span#js-dislike = @article.get_down_votes.size
+
+        .pull-right.small
+        	| Share: #{social_share_button_tag(@article.title, 'data-popup' => true)}
 
 
-/ rate
-div.pull-right
-  .small
-    = link_to "Upvote", upvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
-    = "&nbsp;".html_safe
-    span.upvote class="badge" = @article.get_up_votes.size
-    = "&nbsp;".html_safe
-    = link_to "Downvote", downvote_article_path(@article), method: :put, :class => "small", remote: user_signed_in?
-    = "&nbsp;".html_safe
-    span.downvote class="badge" = @article.get_down_votes.size
+        .clearfix
 
-.clearfix
-/ share
-hr
-.pull-left.small
-	| Share: #{social_share_button_tag(@article.title, 'data-popup' => true)}
-.clearfix
-- if user_signed_in?
-	p.small
-		= link_to 'Edit', edit_article_path(@article)
+        /! author
+        hr
+      	.text-center
+          = avatar_with_size(@article.user, '64')
+      	.text-center
+      		h4 = link_to "#{@article.user.full_name}", user_path(@article.user.slug)
+      		.post-author.small = @article.user.biographical_info.html_safe
 
-/! author
-hr
-.media
-	.media-left.pull-left
-		- if @article.user.avatar_url.split('/')[5].eql?("default_profile_pic.jpg")
-			= image_tag("default_profile_pic.jpg", size: "64", class: "img-circle")
-		- else
-			= image_tag(@article.user.avatar_url, size: "64", class: "img-circle")
-	.media-body
-		h4.media-heading = link_to "#{@article.user.firstname} #{@article.user.lastname}", user_path(@article.user.id)
-		.small = @article.user.biographical_info.html_safe
-hr
-.pull-right.small
-	= link_to "Report Abuse", new_article_abuse_report_path(@article.slug), remote: true
+        hr
+        .pull-right
+          .small = link_to "Report Abuse", new_article_abuse_report_path(@article.slug), remote: true
 
-.clearfix
+        .clearfix
 
-/! form comment
-h3 Comments
-= bootstrap_form_for [@article, @comment] do |f|
-	- unless user_signed_in?
-		= f.text_field :name, placeholder: "Name", class: 'required'
-		= f.email_field :email, placeholder: "Email", class: 'required'
+        /! form comment
+        h3 Comments
+        = bootstrap_form_for [@article, @comment] do |f|
+        	- unless user_signed_in?
+        		= f.text_field :name, placeholder: "Name", class: 'required'
+        		= f.email_field :email, placeholder: "Email", class: 'required'
 
-	= f.text_area :comment, hide_label: true, rows: "5", placeholder: "Comments..", class: 'required'
-	= f.submit "Post Comment"
+        	= f.text_area :comment, hide_label: true, rows: "5", placeholder: "Comments..", class: 'required'
+        	= f.submit "Post Comment"
 
-/! list of comments
-br
-- @comments.each do |comment|
-	.small.well
-		span: strong #{comment.name}
-		span.small.pull-right.text-muted: em #{time_ago_in_words comment.created_at} ago
-		p = sanitize simple_format(comment.comment)
+        /! list of comments
+        br
+        - @comments.each do |comment|
+        	.small.well
+        		span: strong #{comment.name}
+        		span.small.pull-right.text-muted: em #{time_ago_in_words comment.created_at} ago
+        		p = sanitize simple_format(comment.comment)
 
-		- if user_signed_in? and current_user.id.eql?(@article.user_id)
-			= link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => "small text-danger"
+        		- if user_signed_in? and current_user.id.eql?(@article.user_id)
+        			= link_to 'Delete comment',[@article, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "small text-danger"
 
 
 #j-modal-container

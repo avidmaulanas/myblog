@@ -1,0 +1,17 @@
+.container
+  .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+    .content-no-head
+      .page-header
+        h2 Edit account
+
+      = bootstrap_form_for(@user, url: profile_account_path) do |f|
+        .form-group.input-group-lg
+          = f.email_field :email, :class => "form-control"
+
+        = f.submit "Update account", :class => "btn btn-default"
+
+      hr
+      p.small Cancel my account
+
+      p.small Unhappy?
+      = button_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn btn-danger"

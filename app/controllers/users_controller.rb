@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :remove_avatar,
+    :account, :account_update , :password, :password_update]
   skip_before_filter :authenticate_user!, :only => [:show]
 
   # GET /users
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to profile_url, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -50,9 +51,11 @@ class UsersController < ApplicationController
       @user.save
     end
 
+    @user.slug = nil
+    @user.account_required = false
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to profile_url, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -71,10 +74,43 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_avatar
+    @user.remove_avatar!
+    @user.save
+    redirect_to profile_url, notice: 'Avatar was successfully removed.'
+  end
+
+  def account
+  end
+
+  def account_update
+    respond_to do |format|
+      @user.skip_reconfirmation!
+      if @user.update_without_password(account_params)
+        format.html { redirect_to profile_account_url, notice: 'Account was successfully updated.' }
+      else
+        format.html { render :account }
+      end
+    end
+  end
+
+  def password
+  end
+
+  def password_update
+    if @user.update_with_password(password_params)
+      # Sign in the user by passing validation in case their password changed
+      sign_in @user, bypass: true
+      redirect_to profile_password_url, notice: 'Password was successfully changed.'
+    else
+      render :password
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user || User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -83,4 +119,11 @@ class UsersController < ApplicationController
         :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h, :avatar, :avatar_cache)
     end
 
+    def account_params
+      params.require(:user).permit(:email)
+    end
+
+    def password_params
+      params.require(:user).permit(:current_password, :password, :password_confirmation)
+    end
 end

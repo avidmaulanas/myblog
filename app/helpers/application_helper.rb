@@ -2,16 +2,6 @@ module ApplicationHelper
 	include ActsAsTaggableOn::TagsHelper
 
   def flash_messages
-    # flash.each do |msg_type, message|
-    #   content =
-    #   content_tag(:div, message, class: "alert #{bootstrap_class_for(msg_type)} fade in", role: "alert") do
-    #     concat content_tag(:button, content_tag(:span, "&times;".html_safe, aria_hidden: "true"), class: "close", data: { dismiss: 'alert'}, aria_label: "Close" )
-    #     concat message
-    #   end
-
-    #   concat(content)
-    # end
-    # nil
     if notice
       content_tag(:div, '', class: 'notification', data: { message: notice, type: 'success' })
     elsif alert
@@ -30,9 +20,18 @@ module ApplicationHelper
       end
 	end
 
-	def time
-		Time.new
+	def current_time
+		Time.current
 	end
+
+	def current_user_name
+		current_user.username || current_user.email
+	end
+
+	def avatar_with_size(user, size)
+		image_tag(user.avatar_url, size: size, class: "img-circle")
+	end
+
 
   private
     def bootstrap_class_for(flash_type)

@@ -5,14 +5,14 @@ myCustomConfirmBox = (message, callback) ->
     buttons:
       success:
         label: 'Yes'
-        className: 'btn-success'
+        className: 'btn-success btn-round-lg'
         callback: ->
           if typeof callback == 'function'
             return callback()
           return
       danger:
         label: 'No'
-        className: 'btn-danger'
+        className: 'btn-danger btn-round-lg'
         callback: ->
           true
   return

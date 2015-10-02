@@ -14,5 +14,6 @@
   = f.text_field :lastname, label: 'Last name', class: 'required'
   = f.text_area :biographical_info,  class: 'ckeditor', wrapper: { data: { no_turbolink: true } }
   = f.submit "Update Profile"
+  = link_to "Cancel", profile_path, class: "btn btn-link"
 
 = render 'partials/modal_crop'

@@ -2,11 +2,16 @@
   $.notify {
     message: message
   },
+    element: 'body'
     type: type
-    showProgressbar: false
-    delay: 3000
+    showProgressbar: true
+    delay: 5000
+    offset: 65
+    placement:
+      from: "top"
+      align: "center"
     template:
-      '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+      '<div data-notify="container" class="notif-alert col-xs-11 col-sm-12 alert alert-{0}" role="alert">' +
         '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
         '<span data-notify="icon"></span> ' +
         '<span data-notify="title">{1}</span> ' +
@@ -16,4 +21,3 @@
 $ ->
   message = $('.notification').data('message')
   notif message, $('.notification').data('type') if message?
-

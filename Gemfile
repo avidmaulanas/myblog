@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+# gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -52,14 +52,9 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-fontawesome'
-  gem 'rails-assets-ckeditor'
   gem 'rails-assets-parsleyjs'
   gem 'rails-assets-cropper'
 end
-
-# Puma as the app server
-gem 'puma'
-gem 'foreman'
 
 # database
 gem 'pg'
@@ -97,9 +92,6 @@ gem 'mini_magick'
 # Access control system
 gem 'action_access'
 
-# Gem ckeditor
-gem 'ckeditor'
-
 # Frindly ID
 gem 'friendly_id'
 
@@ -123,3 +115,9 @@ gem 'bootbox-rails'
 
 # Background process
 gem 'sidekiq'
+
+# Rich text editor
+gem 'tinymce-rails'
+
+# Avatar generator
+gem 'avatarly'

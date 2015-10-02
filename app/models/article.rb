@@ -10,10 +10,12 @@ class Article < ActiveRecord::Base
 
 	before_save :downcase_status
 
-	scope :all_user, -> { select("article.*, user.username, user.email").
-		where("article.status = 'published'").
-		joins("as article inner join users as user on article.user_id = user.id")
-	}
+	# scope :all_user, -> { select("article.*, user.username, user.email").
+	# 	where("article.status = 'published'").
+	# 	joins("as article inner join users as user on article.user_id = user.id")
+	# }
+
+	scope :all_user, -> { includes(:user).where(status: 'published') }
 	scope :current_user, -> { where(user_id: User.current.id)}
 	scope :last_articles, -> { order("created_at DESC").limit(20) }
 	scope :by_subdomain, ->(n) { where(["user.username = ?", n]) } #=> dipanggil setelah :all_user

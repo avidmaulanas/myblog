@@ -1,43 +1,45 @@
-- content_for(:content_dashboard)
+.row
 	.container-fluid
-		.page-header
-			h1 Dashboard
+		.col-md-12
+			.content-no-head
+				.page-header
+					h1 Dashboard
 
-		.panel.panel-default
-		  .panel-heading.text-right
-		    .small
-		    	| Draft (#{@number_articles_draft})
-					| Published (#{@number_articles_published})
+				.panel.panel-default
+				  .panel-heading.text-right
+				    .small
+				    	| Draft (#{@number_articles_draft})
+							| Published (#{@number_articles_published})
 
-		  .panel-body
-		  	table.table.table-hover.small
-					thead
-						tr
-							th
-								= "#{'Article'.pluralize(@number_articles)}"
-								| &nbsp;
-								span.badge = "#{@number_articles}"
-							th Comment
-							th Status
-							th.text-center Actions
-					tbody
-					- @articles_all.each do |article|
-						tr
-							td
-								strong = link_to article.title, article, data: { no_turbolink: false }
-								br: span.text-muted
-									| Posted by &nbsp;
-									em = link_to article.user.full_name, user_path(article.user.slug)
-									| &nbsp; on &nbsp;
-									= article.updated_at.to_formatted_s(:long_ordinal)
-							td = pluralize(article.comments.count, "comment")
-							td = article.status.capitalize
-							td.text-center
-								.btn-group.btn-group-sm
-									= link_to edit_article_path(article.slug), class: 'btn btn-default', data: { toggle: 'tooltip', title: 'Edit article'}
-										i.fa.fa-edit.fa-lg
-									= link_to article, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', title: 'Remove article' }, class: 'btn btn-danger'
-										i.fa.fa-remove.fa-lg
+				  .panel-body
+				  	table.table.table-hover.small
+							thead
+								tr
+									th
+										= "#{'Article'.pluralize(@number_articles)}"
+										| &nbsp;
+										span.badge = "#{@number_articles}"
+									th Comment
+									th Status
+									th.text-center Actions
+							tbody
+							- @articles_all.each do |article|
+								tr
+									td
+										strong = link_to article.title, article, data: { no_turbolink: false }
+										br: span.text-muted
+											| Posted by &nbsp;
+											em = link_to article.user.full_name, user_path(article.user.slug)
+											| &nbsp; on &nbsp;
+											= article.updated_at.to_formatted_s(:long_ordinal)
+									td = pluralize(article.comments.count, "comment")
+									td = article.status.capitalize
+									td.text-center
+										.btn-group.btn-group-sm
+											= link_to edit_article_path(article.slug), class: 'btn btn-default', data: { toggle: 'tooltip', title: 'Edit article'}
+												i.fa.fa-edit.fa-lg
+											= link_to article, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', title: 'Remove article' }, class: 'btn btn-danger'
+												i.fa.fa-remove.fa-lg
 
-	ul.pager
-		li = paginate @articles_all
+				ul.pager
+					li = paginate @articles_all
