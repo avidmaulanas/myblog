@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     end
 
     @user.slug = nil
-    @user.account_required = false
+    @user.edit_user = true
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to profile_url, notice: 'Profile was successfully updated.' }
@@ -85,6 +85,7 @@ class UsersController < ApplicationController
 
   def account_update
     respond_to do |format|
+      @user.edit_user = true
       @user.skip_reconfirmation!
       if @user.update_without_password(account_params)
         format.html { redirect_to profile_account_url, notice: 'Account was successfully updated.' }

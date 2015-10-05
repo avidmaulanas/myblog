@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
  	has_many :articles
 
   validates :email, format: { with: Devise.email_regexp, message: "This value should be a valid email." }
- 	validates :password, length: Devise.password_length, if: :is_signup?
- 	validates :password_confirmation, length: Devise.password_length, unless: [ :skip_on_account?, :is_signup? ]
-  validates :firstname, :lastname, presence: true, on: :update, unless: [ :skip_on_account?, :is_signup? ]
+ 	validates :password, length: Devise.password_length, allow_blank: true, unless: :edit_user?
+ 	validates :password_confirmation, length: Devise.password_length, unless: :edit_user?
+  validates :firstname, :lastname, presence: true, on: :update, if: :edit_user?
 
-  attr_accessor :password_required, :account_required, :signup_required
+  attr_accessor :edit_user
 
  	mount_uploader  :avatar, AvatarUploader
   crop_uploaded   :avatar
@@ -53,16 +53,8 @@ class User < ActiveRecord::Base
   end
 
   private
-    def skip_on_account?
-      self.account_required || true
-    end
-
-    def is_signup?
-      self.signup_required || true
-    end
-
-    def password_required?
-      self.password_required || false
+    def edit_user?
+      self.edit_user
     end
 
     def slug_random
