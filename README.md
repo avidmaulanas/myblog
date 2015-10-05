@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/avidmaulanas/myblog.svg?branch=master)](https://travis-ci.org/avidmaulanas/myblog)
+
 #Getting Started
 
 ####Clone
