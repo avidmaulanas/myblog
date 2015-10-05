@@ -99,6 +99,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.3.0)
     friendly_id (5.1.0)
@@ -222,6 +223,19 @@ GEM
       railties (>= 4.2.0, < 5)
     rfc822 (0.1.5)
     rmagick (2.15.4)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.2)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
     sass (3.4.12)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -326,6 +340,7 @@ DEPENDENCIES
   rails-assets-fontawesome!
   rails-assets-parsleyjs!
   rails_12factor
+  rspec
   sdoc (~> 0.4.0)
   sidekiq
   slim-rails

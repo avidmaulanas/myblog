@@ -46,6 +46,8 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'letter_opener_web'
+
+  gem 'rspec'
 end
 
 # Assets
