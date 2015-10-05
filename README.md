@@ -1,28 +1,27 @@
-== README
+#Getting Started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+####Clone
 
-Things you may want to cover:
+```
+$ git clone https://github.com/avidmaulanas/myblog.git
+```
 
-* Ruby version
+####Create database
 
-* System dependencies
+```
+$ cd myblog
+$ rake db:create
+$ rake db:migrate
+```
 
-* Configuration
+####Start server
 
-* Database creation
+```
+$ rails s
+```
 
-* Database initialization
+###Run app
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open in your browser [http://localhost:3000](http://localhost:3000)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
