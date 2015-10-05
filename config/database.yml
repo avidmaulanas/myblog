@@ -24,29 +24,20 @@
 #   <<: *default
 #   database: db/production.sqlite3
 
-development:
+default: &default
   adapter: postgresql
-  encoding: utf8
-  database: myblog_development
   pool: 5
-  username: avid
-  password: avid123
+  encoding: unicode
+  username: postgres
 
-test: &TEST
-  adapter: postgresql
-  encoding: utf8
+development:
+  <<: *default
+  database: myblog_development
+
+test:
+  <<: *default
   database: myblog_test
-  pool: 5
-  username: avid
-  password: avid123
 
 production:
-  adapter: postgresql
-  encoding: utf8
+  <<: *default
   database: myblog_production
-  pool: 5
-  username: avid
-  password: avid123
-
-cucumber:
-  <<: *TEST
