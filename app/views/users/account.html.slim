@@ -5,10 +5,8 @@
         h2 Edit account
 
       = bootstrap_form_for(@user, url: profile_account_path) do |f|
-        .form-group.input-group-lg
-          = f.email_field :email, :class => "form-control"
-
-        = f.submit "Update account", :class => "btn btn-default"
+        = f.email_field :email, wrapper: { class: 'input-group-lg'}
+        = f.submit "Update account", class: "btn btn-default"
 
       hr
       p.small Cancel my account

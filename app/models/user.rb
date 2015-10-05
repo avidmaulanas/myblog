@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
 
  	has_many :articles
 
-  validates :email, presence: true, format: { with: Devise.email_regexp }
- 	validates :password, length: Devise.password_length, unless: :skip_on_account?
- 	validates :password_confirmation, length: Devise.password_length, unless: [ :skip_on_account?, :skip_on_signup? ]
-  validates :firstname, :lastname, presence: true, on: :update, unless: [ :skip_on_account?, :skip_on_signup? ]
+  validates :email, format: { with: Devise.email_regexp, message: "This value should be a valid email." }
+ 	validates :password, length: Devise.password_length, if: :is_signup?
+ 	validates :password_confirmation, length: Devise.password_length, unless: [ :skip_on_account?, :is_signup? ]
+  validates :firstname, :lastname, presence: true, on: :update, unless: [ :skip_on_account?, :is_signup? ]
 
   attr_accessor :password_required, :account_required, :signup_required
 
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
       self.account_required || true
     end
 
-    def skip_on_signup?
+    def is_signup?
       self.signup_required || true
     end
 
