@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
 
   validates :email, format: { with: Devise.email_regexp, message: "This value should be a valid email." }
  	validates :password, length: Devise.password_length, allow_blank: true, unless: :edit_user?
- 	validates :password_confirmation, length: Devise.password_length, unless: :edit_user?
+ 	validates :password_confirmation, length: Devise.password_length, if: :edit_password?
   validates :firstname, :lastname, presence: true, on: :update, if: :edit_user?
 
-  attr_accessor :edit_user
+  attr_accessor :edit_user, :edit_password
 
  	mount_uploader  :avatar, AvatarUploader
   crop_uploaded   :avatar
@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
       self.edit_user
     end
 
+    def edit_password?
+      self.edit_password
+    end
+
     def slug_random
       [*('a'..'z'),*('0'..'9')].shuffle[0,8].join
     end
@@ -72,5 +76,11 @@ class User < ActiveRecord::Base
         f.write img
       end
       File.open("#{Rails.root}/#{dir}/avatar.png")
+    end
+
+    def validate_username
+      if User.where(email: username).exists?
+        errors.add(:username, :invalid)
+      end
     end
 end

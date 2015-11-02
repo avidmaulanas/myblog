@@ -99,6 +99,7 @@ class UsersController < ApplicationController
   end
 
   def password_update
+    @user.edit_password = true
     if @user.update_with_password(password_params)
       # Sign in the user by passing validation in case their password changed
       sign_in @user, bypass: true
