@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
  	mount_uploader  :avatar, AvatarUploader
   crop_uploaded   :avatar
-  process_in_background :avatar
+  # process_in_background :avatar
 
   extend FriendlyId
 
