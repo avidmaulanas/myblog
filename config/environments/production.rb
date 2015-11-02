@@ -80,18 +80,18 @@ Rails.application.configure do
   # less
   config.less.compress = true
 
-  config.action_mailer.default_url_options = { :host => 'whispering-wave-3076.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'myblog-dev.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "whispering-wave-3076.herokuapp.com",
+    domain: "myblog-dev.herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    user_name: "avidmaulanas",
+    password: "Y4oq7GyjlOu7ZUijIBqUmA"
   }
 end
