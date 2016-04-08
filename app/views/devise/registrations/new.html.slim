@@ -1,13 +1,13 @@
 .container
-  .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+  .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
     .content-no-head
       .page-header
         h2 Sign up
 
       = bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = f.email_field :email, autofocus: true, wrapper: { class: 'input-group-lg'}
+        = f.email_field :email, hide_label: true, autofocus: true, wrapper: { class: 'input-group-lg'}, placeholder: "Email"
         - if @validatable
-          = f.password_field :password, autocomplete: "off", wrapper: { class: 'input-group-lg'}
+          = f.password_field :password, hide_label: true, autocomplete: "off", wrapper: { class: 'input-group-lg'}, placeholder: "Password"
 
         .form-group
-            = f.submit "Sign up"
+          = f.submit "Sign up", class: "btn btn-primary btn-lg"

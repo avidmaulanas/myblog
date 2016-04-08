@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-# Ruby 2.2.0
+ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -44,19 +44,15 @@ group :development, :test do
   gem 'bullet'
   gem 'lol_dba'
   gem 'pry-rails'
-
   gem 'letter_opener_web'
-
   gem 'rspec'
 end
 
 # Assets
-source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
-  gem 'rails-assets-fontawesome'
-  gem 'rails-assets-parsleyjs'
-  gem 'rails-assets-cropper'
-end
+gem 'less-rails-bootstrap'
+gem 'font-awesome-rails'
+gem 'parsley-rails'
+gem 'jquery-cropper'
 
 # database
 gem 'pg'
@@ -65,7 +61,7 @@ gem 'pg'
 gem 'slim-rails'
 
 # template css
-gem 'less-rails'
+gem 'less-rails', '~> 2.7.1'
 
 # Devise for authentication
 gem 'devise'

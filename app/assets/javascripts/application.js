@@ -15,11 +15,11 @@
 //= require jquery.jcrop
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require social-share-button
-//= require bootstrap
 //= require nprogress
 //= require nprogress-turbolinks
-//= require parsleyjs
+//= require parsley
 //= require bootstrap-notify
 //= require bootbox
 //= require cropper
