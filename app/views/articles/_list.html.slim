@@ -1,3 +1,7 @@
+- if @articles.empty?
+  .well.text-center
+    h1 Not have article
+
 - @articles.each do |article|
     .post-preview
       .post-title
@@ -16,5 +20,3 @@
 /! Pager
 ul.pager
   li = paginate @articles
-
-= render 'empty' if @articles.empty?
