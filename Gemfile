@@ -46,6 +46,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'letter_opener_web'
   gem 'rspec'
+  gem 'sunspot_solr'
+  gem 'progress_bar'
+  gem 'faker'
 end
 
 # Assets
@@ -120,4 +123,8 @@ gem 'tinymce-rails'
 # Avatar generator
 gem 'avatarly'
 
+# Heroku
 gem 'rails_12factor', group: :production
+
+# Search engine
+gem 'sunspot_rails'
