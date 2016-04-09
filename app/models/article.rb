@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
 	scope :current_user, -> { where(user_id: User.current.id)}
 	scope :last_articles, -> { order("created_at DESC").limit(20) }
 	scope :by_subdomain, ->(n) { where(["user.username = ?", n]) } #=> dipanggil setelah :all_user
-	scope :published, -> { where(status: 'published')}
+	scope :published, -> { includes(:tags, :user).where(status: 'published')}
 	scope :draft, -> { where(status: 'draft')}
 	scope :order_by_desc, -> {order("created_at DESC")}
 	scope :recent, -> (n) { where("user_id > 0").order("created_at DESC").limit(n) }

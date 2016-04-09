@@ -1,6 +1,10 @@
 = bootstrap_form_for [@article, @abuse_report], inline_errors: false do |f|
-  = f.email_field :email, class: 'required'
-  = f.text_field :title, class: 'required'
-  = f.text_area :description, class: 'tinymce required', data: { no_turbolink: true }
-  = f.submit "Post Report"
+	.modal-body	
+	  = f.email_field :email, class: 'required'
+	  = f.text_field :title, class: 'required'
+	  = f.text_area :description, class: 'tinymce required', data: { no_turbolink: true }
+		  
+	.modal-footer
+    button.btn.def-default.btn-apply data-dismiss="modal" type="button"  Cancel
+    / # = f.submit "Post Report", class: "btn btn-primary"
 

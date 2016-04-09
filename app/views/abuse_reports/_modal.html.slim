@@ -5,8 +5,15 @@
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true"  &times;
         h4.modal-title Abuse Report
-      .modal-body
-        = render 'abuse_reports/form'
+      
+      = bootstrap_form_for [@article, @abuse_report], inline_errors: false do |f|
+        .modal-body 
+          = f.email_field :email, class: 'required'
+          = f.text_field :title, class: 'required'
+          = f.text_area :description, class: 'tinymce required', data: { no_turbolink: true }
+            
+        .modal-footer
+          button.btn.def-default.btn-apply data-dismiss="modal" type="button"  Cancel
+          = f.submit "Post Report", class: "btn btn-primary"
 
-      .modal-footer
-        button.btn.def-default.btn-apply data-dismiss="modal" type="button"  Cancel
+     

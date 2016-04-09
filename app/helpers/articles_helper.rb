@@ -14,7 +14,7 @@ module ArticlesHelper
   end
 
   def link_tags(tags)
-    tags.map { |tag| link_to "#{tag.name}", tagged_url(tag: tag.name) }.join(', ').html_safe
+    tags.map { |tag| link_to tag.name.titleize, tagged_articles_path(tag: tag.name) }.join(', ').html_safe
   end
 
   def post_author(article)

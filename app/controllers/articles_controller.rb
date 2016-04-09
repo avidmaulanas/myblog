@@ -73,13 +73,12 @@ class ArticlesController < ApplicationController
   end
 
   def tagged
-    if params[:tag].present?
-      @articles = Article.published.tagged_with(params[:tag]).page(params[:page]).per(10)
-      @num_articles = Article.published.tagged_with(params[:tag]).size
+    @articles = if params[:tag].present?
+      Article.published.tagged_with(params[:tag]).page(params[:page]).per(10)
     else
-      @articles = Article.published.order('created_at DESC').page(params[:page]).per(10)
-      @num_articles = Article.order('created_at DESC').size
+      Article.published.order('created_at DESC').page(params[:page]).per(10)      
     end
+    @num_articles = @articles.total_count
   end
 
   def upvote
@@ -98,6 +97,8 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to articles_url, alert: "Not found '#{params[:id]}'."
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

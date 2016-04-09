@@ -2,7 +2,7 @@
   .content-no-head
     .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
       .site-heading
-        h2 Tag: #{params[:tag]}
+        h2 Tag: #{params[:tag].titleize}
         p Found #{pluralize(@num_articles, "Article")}
         hr.small
 

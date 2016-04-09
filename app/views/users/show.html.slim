@@ -4,7 +4,7 @@
       h1 Profile
       .jumbotron.text-center
         .profile-avatar
-          = avatar_with_size(current_user, '180')
+          = avatar_with_size(@user, '180')
 
       	.profile-content
           h3 = @user.username

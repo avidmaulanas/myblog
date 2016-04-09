@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts "Create Users..."
 
-progress_bar = ProgressBar.new
+user_progress_bar = ProgressBar.new
 users = []
 
 10.times do 
@@ -23,21 +23,23 @@ users = []
 	user = User.new(user_params)
 	user.save
 	user.confirm!
-	progress_bar.increment!
+	user_progress_bar.increment! 5
 end
+user_progress_bar.increment! 100
 
 puts "Create Articles..."
+article_progress_bar = ProgressBar.new
 articles = []
 30.times do
 	articles << {
 		title: Faker::Lorem.sentence,
 		description: Faker::Hipster.paragraph(3),
 		status: 'published',
-		tag_list: ['Sport', 'News', 'Techno'].sample,
+		tag_list: ['sport', 'news', 'techno'].sample,
 		user_id: User.pluck(:id).sample
 	}
-	progress_bar.increment!
+	article_progress_bar.increment! 5
 end
 
 Article.create(articles)
-progress_bar.increment!
+article_progress_bar.increment! 100
