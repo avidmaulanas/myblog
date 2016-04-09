@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def slug_name
-    self.username || slug_random
+    [self.firstname, self.lastname].join('-') || slug_random
   end
 
   def should_generate_new_friendly_id?
