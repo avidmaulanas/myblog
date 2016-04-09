@@ -10,11 +10,6 @@ class Article < ActiveRecord::Base
 
 	before_save :downcase_status
 
-	# scope :all_user, -> { select("article.*, user.username, user.email").
-	# 	where("article.status = 'published'").
-	# 	joins("as article inner join users as user on article.user_id = user.id")
-	# }
-
 	scope :all_user, -> { includes(:user).where(status: 'published') }
 	scope :current_user, -> { where(user_id: User.current.id)}
 	scope :last_articles, -> { order("created_at DESC").limit(20) }
@@ -28,9 +23,28 @@ class Article < ActiveRecord::Base
 	acts_as_taggable
 	acts_as_votable
 
+	searchable do
+    text :title, boost: 5
+    text :description, :posted_month, :author_name
+    text :tags do
+    	tags.map(&:name)
+    end
+
+    string 	:status
+    time    :created_at
+  end
 
 	private
 		def downcase_status
 			self.status.downcase!
 		end
+
+		def posted_month
+		  self.created_at.strftime("%B %Y")
+		end
+
+		def author_name
+			self.user.full_name
+		end
+
 end

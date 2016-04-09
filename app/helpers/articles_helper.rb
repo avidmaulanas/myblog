@@ -21,4 +21,8 @@ module ArticlesHelper
     "Posted by #{link_to article.user.full_name, user_path(article.user.slug)} on
      #{article.created_at.to_formatted_s(:long_ordinal)}".html_safe
   end
+
+  def search_result_with_delimiter(number, options={})
+    "About #{pluralize(number_with_delimiter(@num_articles, options), "result")}"
+  end
 end

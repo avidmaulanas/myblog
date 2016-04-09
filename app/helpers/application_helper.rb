@@ -32,6 +32,9 @@ module ApplicationHelper
 		image_tag(user.avatar_url, size: size, class: "img-circle")
 	end
 
+  def search_remote?
+    (controller_name.eql?('articles') and action_name.eql?('index')) or controller_name.eql?('search') 
+  end
 
   private
     def bootstrap_class_for(flash_type)

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'search', to: 'search#index'
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/mail"
   end

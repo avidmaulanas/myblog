@@ -1,6 +1,11 @@
 - if @articles.empty?
   .well.text-center
-    h1 Not have article
+    h2= "Not found '#{params[:q]}'"
+- elsif params[:q].present?
+  .site-heading
+    strong = "Search: <em>#{params[:q]}</em>".html_safe
+    p.small = search_result_with_delimiter(@num_articles, delimiter: '.')
+    hr.small
 
 - @articles.each do |article|
     .post-preview
@@ -12,7 +17,7 @@
         = sanitize article.description.truncate(100, sparate: ".")
 
         - if article.tags.any?
-          .small Tagged with: #{link_tags(article.tags)}
+          .small style="padding-top: 10px;" Tags: #{link_tags(article.tags)}
 
     - if not @articles.last.id.eql?(article.id)
       hr
