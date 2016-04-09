@@ -45,8 +45,7 @@ group :development, :test do
   gem 'lol_dba'
   gem 'pry-rails'
   gem 'letter_opener_web'
-  gem 'rspec'
-  gem 'sunspot_solr'
+  gem 'rspec'  
   gem 'progress_bar'
   gem 'faker'
 end
@@ -128,3 +127,4 @@ gem 'rails_12factor', group: :production
 
 # Search engine
 gem 'sunspot_rails'
+gem 'sunspot_solr'
