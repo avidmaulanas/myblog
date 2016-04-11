@@ -22,3 +22,5 @@
 dump.rdb
 
 /solr/*
+/config/database.yml
+
