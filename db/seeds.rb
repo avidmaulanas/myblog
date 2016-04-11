@@ -5,7 +5,7 @@ puts "Create Users..."
 user_progress_bar = ProgressBar.new(11)
 users = []
 
-10.times do 
+10.times do
 	user_params = {
 		username: Faker::Internet.user_name,
 		firstname: Faker::Name.first_name,
@@ -23,22 +23,22 @@ end
 user_progress_bar.increment!
 
 puts "Create Articles..."
-article_progress_bar = ProgressBar.new(5_000)
+article_progress_bar = ProgressBar.new(1_000_000)
 articles = []
-5_000.times do
+1_000_000.times do
 	ActiveRecord::Base.transaction do
 		article_params = {
-			title: Faker::Lorem.sentence,
-			description: Faker::Hipster.paragraphs(3).join(' '),
+			title: Faker::Company.catch_phrase,
+			description: Faker::Lorem.paragraphs(rand(3..8)).join(' '),
 			status: 'published',
 			tag_list: ['sport', 'news', 'techno'].sample,
 			user_id: User.pluck(:id).sample,
-			created_at: Faker::Date.between(1.year.ago, Date.today)
+			created_at: Faker::Date.between(2.year.ago, Date.today)
 		}
 		article = Article.new(article_params)
 		article.save
-		article_progress_bar.increment! 10
+		article_progress_bar.increment! 100
 	end
 end
 
-article_progress_bar.increment! 5_000
+article_progress_bar.increment! 1_000_000
