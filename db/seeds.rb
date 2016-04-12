@@ -37,8 +37,8 @@ articles = []
 		}
 		article = Article.new(article_params)
 		article.save
-		article_progress_bar.increment! 100
+		article_progress_bar.increment!
 	end
 end
 
-article_progress_bar.increment! 1_000_000
+article_progress_bar.increment!
